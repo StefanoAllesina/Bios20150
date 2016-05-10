@@ -398,9 +398,9 @@ $e^{r \tau} = 2$
 
 $r \tau = \log(2)$
 
-$\tau = \frac{log(2)}{r} = \frac{0.301029995...}{r}$
+$\tau = \frac{log(2)}{r} = \frac{0.693147...}{r}$
 
-Thus, if $r = 0.01$, then the population doubles every 30 years or so; $r = 0.05$, every 6 years; and so on.
+Thus, if $r = 0.01$, then the population doubles every **70** years or so; $r = 0.05$, every **14** years; and so on.
 
 ## Halving time and carbon dating
 Unstable atoms release energy through radioactive decay. This process is random, and, at the level of the single atom, cannot be predicted. However, we can measure statistically  the rate at which atoms decay. The Carbon isotope $\mathrm{^{14}C}$ is formed in the atmosphere when cosmic rays strike Nitrogen atoms:
