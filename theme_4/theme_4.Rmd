@@ -14,10 +14,64 @@ output:
 **It is interesting to contemplate a tangled bank, clothed with many plants of many kinds, with birds singing on the bushes, with various insects flitting about, and with worms crawling through the damp earth, and to reflect that these elaborately constructed forms, so different from each other, and dependent upon each other in so complex a manner, have all been produced by laws acting around us.**
 *On the Origin of Species (1859) by Charles Darwin*
 
-**if you look at the world in a certain way, everything is connected to everything else.**
+**If you look at the world in a certain way, everything is connected to everything else.**
 *Foucault's Pendulum (1988) by Umberto Eco* 
 
-## Interactions among individuals in the same population
+## Interactions at play in the Serengeti
+<div class="centered">
+<img src="./images/Serengeti.jpg" alt="trees" height="540"> 
+</div>
+
+## Tree growth (Packer et al. Science 2005)
+
+<div class="centered">
+<img src="./images/Treegrowth.jpg" alt="trees" height="540"> 
+</div>
+
+## The players: Trees
+
+<div class="centered">
+<img src="./images/trees.jpg" alt="trees" height="360"> 
+</div>
+
+## The players: Elephants
+
+<div class="centered">
+<img src="./images/elephant.jpg" alt="elephant" height="360"> 
+</div>
+
+## The players: Grass
+
+<div class="centered">
+<img src="./images/grass.jpg" alt="grass" height="360"> 
+</div>
+
+## The players: Fire
+
+<div class="centered">
+<img src="./images/fire.jpg" alt="fire" height="360"> 
+</div>
+
+## The players: Wilderbeest
+
+<div class="centered">
+<img src="./images/wilderbeest.jpg" alt="wilderbeest" height="360"> 
+</div>
+
+## The players: A virus?!
+
+<div class="centered">
+<img src="./images/rinderpest.jpg" alt="rinderpest" height="360"> 
+</div>
+
+
+## Interactions at play in the Serengeti
+
+<div class="centered">
+<img src="./images/chain_sere.jpg" alt="chain" height="360"> 
+
+Holdo et al., 2009
+</div>
 
 ## Types of interaction between species
 
@@ -27,15 +81,40 @@ output:
 
 - *Mutualism (+, +)*, e.g., pollination, seed-dispersal, symbiosis
 
-- *Amensalism (-, 0)*, 
+- *Amensalism (-, 0)* 
 
-- *Commensalism (+, 0)*, 
+- *Commensalism (+, 0)*
 
 ## Network structure
+
+
 
 ## Lotka-Volterra equations
 
 ## Competition
+
+$\dfrac{d X_1}{dt} = X_1 \left( r_1 - A_{1,1} X_1 - A_{1,2} X_2 \right)$
+
+$\dfrac{d X_2}{dt} = X_2 \left( r_2 - A_{2,2} X_2 - A_{2,1} X_1 \right)$
+
+$A_{1,1}$: intra-specific competition species 1
+
+$A_{1,2}$: inter-specific competition --- effect of species 2 on species 1
+
+if $A_{1,1} > A_{1,2}$ adding a conspecific decreases growth more than adding heterospecific
+
+## Equilibria
+
+$\dfrac{d X_1}{dt} = X_1 \left( r_1 - A_{1,1} X_1 - A_{1,2} X_2 \right)$
+
+$\dfrac{d X_2}{dt} = X_2 \left( r_2 - A_{2,2} X_2 - A_{2,1} X_1 \right)$
+
+Setting both equations to zero, we find:
+- $(X_1^*, X_2^*) = (0, 0)$ Trivial equilibrium (no populations!)
+- $(X_1^*, X_2^*) = \left(\frac{r_1}{A_{1,1}} , 0\right)$ Species 1 to carrying capacity; species 2 extinct
+- $(X_1^*, X_2^*) = \left(0, \frac{r_2}{A_{2,2}} \right)$ Species 2 to carrying capacity; species 1 extinct
+- $(X_1^*, X_2^*) =$ Most interesting equilibrium, exists only when 
+
 
 ## A model for consumption
 
@@ -51,18 +130,17 @@ output:
 
 ## Cooperation is a selfish world $\Pi$
 
-Cooperation has been seen as problematic: 
+Traditionally, cooperation has been seen as problematic for evolution: 
 
-*"As Darwin appreciated, cooperative behaviour–—actions adapted to assist others that involve costs to the fitness of participants—poses a fundamental problem to the traditional theory of natural selection, which rests on the assumption that individuals compete to survive and breed"* (Clutton-Brock, 2009)
+*"As Darwin appreciated, cooperative behaviour--actions adapted to assist others that involve costs to the fitness of participants--poses a fundamental problem to the traditional theory of natural selection, which rests on the assumption that individuals compete to survive and breed"* (Clutton-Brock, 2009)
 
-
+*Natural selection cannot possibly produce any modification in a species exclusively for the good of another species; though throughout nature one species incessantly takes advantage of, and profits by the structures of others. [...] If it could be proved that any part of the structure of any one species had been formed for the exclusive good of another species, it would annihilate my theory, for such could not have been produced through natural selection* (Darwin, On the origin of species, 1859)
 
 ## Prisoner's dilemma
-    C    D
--- ---- ----
-C    R    S
-D    T    P
--- ---- ----
+$\,$ |  C   | D
+--: | :----: | :----:
+C  | R    | S
+D  | T    | P
 
 - Two strategies: **C**ooperate, **D**efect
 - If Player 1 (rows) plays **C** and Player 2 (cols) plays **C**, Player 1 receives **R** (reward)
@@ -73,26 +151,36 @@ D    T    P
 $T > R > P > S$ $\;\;\;\;$ $2 R > T + S$
 
 ## A simple case
-    C    D
--- ---- ----
-C  1    0
-D  1+k  k
--- ---- ----
+$\,$ |  C   | D
+--: | :----: | :----:
+C  | 1    | 0
+D  | 1+k  | k
 
 - **k**: cost to cooperate
 - **k < 1**
 
 ## Nash equilibrium
-    C    D
--- ---- ----
-C  1    0
-D  1+k  k
--- ---- ----
+$\,$ |  C   | D
+--: | :----: | :----:
+C  | 1    | 0
+D  | 1+k  | k
 
 - If Pl 2 plays **C** then Pl 1 would get **1** to cooperate, and **1 + k** to defect
 - If Pl 2 plays **D** then Pl 1 would get **0** to cooperate, and **k** to defect
-- It is always convenient to defect! 
+- It is always logical to defect! 
 - If Pl 2 is also rational, both will defect --- but then they would both receive lower payoffs than if they had cooperated!
+
+## Nash Equilibrium
+
+*"Nash equilibrium is an action profile with the property that no single player can obtain a higher payoff by deviating unilaterally from this profile."* (Int. Encyclopedia of social Sciences)
+
+Proposed by John Nash as part of his PhD thesis in 1950 (led to Nobel Memorial Prize in Economic Sciences in 1994).
+
+$\,$ |  C   | D
+--: | :----: | :----:
+C  | 1    | 0
+D  | 1+k  | k
+
 
 ## Iterated Prisoner's Dilemma (IPD)
 
@@ -117,51 +205,69 @@ Robert Axelrod, a political scientist at U Michigan, invited famed game theorist
 
 ## Winning strategy: Tit For Tat (TFT)
 
-- The winner was one of the simplest strategy, consisting of only two rules:
+- The winner was one of the simplest strategies, consisting of only two rules:
  
 1. Start by playing **C**
 2. Play whatever the opponent played last time
 
-The strategy was submitted by Anatol Rapoport, a mathematical psychologist formerly at UofC.
+The strategy was submitted by Anatol Rapoport, a Canadian mathematical psychologist formerly at UofC.
+
+## TFT vs ALLD
+
+-------- --------------
+ **TFT** CDDDDDDDDDDDDDDDD
+**ALLD** DDDDDDDDDDDDDDDDD
+-------- --------------
+
+
+## TFT vs ALLC
+-------- --------------
+ **TFT** CCCCCCCCCCCCCCCCCC
+**ALLC** CCCCCCCCCCCCCCCCCC
+-------- --------------
 
 ## Axelrod's second tournament
-- The following year, the tournament was repeated: 62 entries
-- The winner was again TFT! (even though everybody knew the results of the first tournament)
+- The following year, the tournament was repeated: 62 entries.
+- The winner was again TFT! (Even though everybody knew the results of the first tournament)
 - In an influential book, Axelrod noted that good strategies possessed several traits:
-- Be nice (don't be the first to defect)
-- Be provocable (retaliate if other player does not cooperate)
-- Don't be envious (care about your score, not that of the opponent)
-- Don't be clever
+- *Be nice* (don't be the first to defect)
+- *Be provocable* (retaliate if other player does not cooperate)
+- *Don't be envious* (care about your score, not that of the opponent)
+- *Don't be clever*
 
 ## Many more tournaments!
-- The tournaments are still played today
-- Some strategies are extremely complex
-- E.g. start playing a certain sequence to see whether two programs are on the same "team", if so, take master/slave roles
+- The tournaments are still played today.
+- Some strategies are extremely complex.
+- Many participants submit multiple strategies meant to act in concert to boost each other's performance.
+- E.g. start playing a certain sequence to see whether two programs are on the same "team"; if so, take master/slave roles.
 
 ## TFT's problem: unforgiving
-The main problem of TFT is that it is unforgiving: once the opponent retaliates, it triggers a cascade of retaliations. 
+The main problem of TFT is that it is unforgiving: once the opponent defects, it triggers a cascade of retaliations. 
+
 This is problematic when communication is not perfect (either you play **D** by mistake, or a **C** is mistaken for a **D**). For example, two TFT playing in a noisy environment:
 
+-------- --------------
 **TFT1** CCCCCCCC**D**DDDDDDDDDDDDD
-
 **TFT2** CCCCCCCCCDDDDDDDDDDDDD
-
+-------- --------------
 ## Generous TFT (GTFT)
 Generous Tit For Tat tries to escape this cascade of retaliation by being "forgiving": it will try restoring cooperation by playing **C** with a certain probability. 
 
-- Start with **C**
-- If the opponent plays **C**, respond with **C**
-- If the opponent plays **D**, respond with **C** with probability 1-k; otherwise play **D**
-- The probability depends on the cost of cooperating
+- Start with **C**.
+- If the opponent plays **C**, respond with **C**.
+- If the opponent plays **D**, respond with **C** with probability 1-k; otherwise play **D**.
+- The probability depends on the cost of cooperating.
 
 ## Other simple strategies
 **WSLS** (Win Stay, Lose Shift)
 
+- Start by cooperating.
 - If the previous move was successful, keep playing it; otherwise, switch to the opposite move.
 
 **GRIM** (Grim Trigger)
 
-- If the previous move both player played **C**, cooperate; otherwise defect
+- Start by cooperating.
+- If in the previous move both player played **C**, cooperate; otherwise defect.
 
 ## Classification of strategies
 - Deterministic vs Stochastic: does the strategy involve randomness?
@@ -169,17 +275,21 @@ Generous Tit For Tat tries to escape this cascade of retaliation by being "forgi
 - Memory 0, Memory 1/2, Memory 1: the strategy uses no information on the previous move (Memory 0); information on the previous move of the opponent (Memory 1/2); information on the previous move of both player (Memory 1).
 
 Examples:
+
 - **RND** (Stochastic, Non-Reactive, Memory 0)
+
 - **TFT** (Deterministic, Reactive, Memory 1/2)
+
 - **GTFT** (Stochastic, Reactive, Memory 1/2)
+
 - **GRIM** (Deterministic, Reactive, Memory 1)
 
 ## Supergames
 
-- For the IPD, it is important that the players do not know how many tournaments will be played
+- For the IPD, it is important that the players do not know how many tournaments will be played.
 - Otherwise, it is convenient to defect at the last round, but then both player will defect at the last round, making it convenient to defect at the penultimate round, and so on.
-- One mathematically convenient approximation is that in which infinitely many rounds are played---early moves do not matter
-- The task of modeling infinite games (supergames) is easier if each player has a small probability of getting confused, playing the "wrong" move
+- One mathematically convenient approximation is that in which infinitely many rounds are played---early moves do not matter.
+- The task of modeling infinite games (supergames) is easier if each player has a small probability of getting confused, playing the "unintended" move.
 
 ## Supergames: math $\Pi$
 
@@ -233,7 +343,7 @@ $\mathbf M = \left(\begin{array}[cccc]
 
 - Because this is a Markov Chain, and because we have the small $\epsilon$ guaranteeing that all coefficients are nonzero, the game will eventually converge to a stationary distribution.
 
-- We can project the game forward $S_t =$  probability of being in each state at time $t$
+- We can project the game forward, modeling $S_t$, the probability of being in each state at time $t$.
 
 - $S_{t + 1} = S_t M$
 
@@ -286,13 +396,13 @@ renderPlot(height = 400, width = 800, {
 ```
 
 ## Evolutionary game theory
-- We have a population of individuals
-- Each individual has genes encoding a strategy
-- Mutations lead to individuals with different strategies
-- Mutations are rare: in this limit we will have at most two strategies at any time
+- We have a population of individuals.
+- Each individual has genes encoding a strategy.
+- Mutations lead to individuals with different strategies.
+- Mutations are rare: in this limit we will have at most two strategies at any time.
 - Can mutations spread in the population?
-- Only if "mutant" can invade "wildtype"
-- We need to consider the average payoff (fitness) of the mutant against wildtype, mutant against mutant, wildtype against wildtype
+- Only if "mutant" can invade "wildtype".
+- We need to consider the average payoff (fitness) of the mutant against wildtype, mutant against mutant, wildtype against wildtype.
 
 ## Calculating average payoff (fitness)
 
@@ -347,13 +457,67 @@ renderPlot(height = 400, width = 800, {
 })
 ```
 
-## War and Peace
+## War and Peace: ALLC vs ALLD
+
+Start with a population composed of cooperators: can **ALLD** invade?
+
+## ALLD can invade ALLC
+
+<div class="centered">
+<img src="./images/step1.png" alt="s1" height="500"> 
+</div>
+
+Can **ALLD** be invaded by **TFT**?
+
+## TFT can invade ALLD
+
+<div class="centered">
+<img src="./images/step2.png" alt="s2" height="500"> 
+</div>
+
+Can **TFT** be invaded by **GTFT**?
+
+
+## GTFT can invade TFT
+
+<div class="centered">
+<img src="./images/step3.png" alt="s3" height="500"> 
+</div>
+
+Can **GTFT** be invaded by **ALLC**, closing the cycle?
+
+## The cycle: War and Peace
+
+<div class="centered">
+<img src="./images/step4.png" alt="s4" height="500"> 
+</div>
+
+What about **WSLS**?
+
+## The cycle: War and Peace
+
+<div class="centered">
+<img src="./images/step5.png" alt="s5" height="500"> 
+</div>
+
+Is **WSLS** invasible?
+
+## The cycle: War and Peace
+
+<div class="centered">
+<img src="./images/step6.png" alt="s6" height="500"> 
+</div>
+
+## The cycle: War and Peace
+
+*There is one thing that I have learned in my studies of cooperation over the last 20 years: there is no equilibrium. There is never a stable equilibrium. Cooperation is always being destroyed and has to be rebuilt.* (Martin Nowak)
 
 ## Other mechanisms for cooperation
 
 - We have played with **direct reciprocity** (I scratch your back, you scratch my back)
 - Another key mechanism is **indirect reciprocity** (golden rule --- I scratch your back, somebody will scratch mine)
 - Indirect reciprocity can lead to emergence of cooperation when **reputation** is at stake
+- *"For direct reciprocity you need a face; for indirect reciprocity you need a name."* (David Haig)
 
 ## Spatial cooperation $\Pi$
 
@@ -380,4 +544,10 @@ Nowak and May, 1992
 - Kin selection
 
 ## Cooperation wrapup
+
+- Cooperation can emerge through mutations in an otherwise non-cooperative population.
+- However, a cycle ensues in which cooperative strategies raise and fall.
+- Many mechanisms can give rise to cooperative behavior, including direct reciprocity, indirect reciprocity, spatial patterns, and group/kin selection.
+
+## Interactions matter
 
