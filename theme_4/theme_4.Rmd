@@ -87,9 +87,8 @@ Holdo et al., 2009
 
 ## Network structure
 
+## Lotka Volterra Equations
 
-
-## Lotka-Volterra equations
 
 ## Competition
 
@@ -103,6 +102,18 @@ $A_{1,2}$: inter-specific competition --- effect of species 2 on species 1
 
 if $A_{1,1} > A_{1,2}$ adding a conspecific decreases growth more than adding heterospecific
 
+## Qualitative analysis
+
+- Determine Equilibria
+
+- Determine isoclines of null growth (nullclines)
+
+- Assess stability of equilibria graphically
+
+- Assess stability using invasibility
+
+- Competitive exclusion
+
 ## Equilibria
 
 $\dfrac{d X_1}{dt} = X_1 \left( r_1 - A_{1,1} X_1 - A_{1,2} X_2 \right)$
@@ -115,6 +126,65 @@ Setting both equations to zero, we find:
 - $(X_1^*, X_2^*) = \left(0, \frac{r_2}{A_{2,2}} \right)$ Species 2 to carrying capacity; species 1 extinct
 - $(X_1^*, X_2^*) =$ Most interesting equilibrium, exists only when 
 
+## Graph
+```{r echo = FALSE, warning=FALSE, message=FALSE}
+fluidPage(
+  column(2,
+         wellPanel(
+    numericInput('r1', 'r1', 0.5,
+                 min = 0, max = 5.0, step = 0.1),
+    numericInput('r2', 'r2', 1.5,
+                 min = 0, max = 5.0, step = 0.1),
+    numericInput('a11', 'A11', 2,
+                 min = 0, max = 5.0, step = 0.1),
+    numericInput('a22', 'A22', 2.5,
+                 min = 0, max = 5.0, step = 0.1),
+    numericInput('a12', 'A12', 1,
+                 min = 0, max = 5.0, step = 0.1),
+    numericInput('a21', 'A21', 2.5,
+                 min = 0, max = 5.0, step = 0.1))),
+  column(3,
+         wellPanel(
+    numericInput('x1', 'x1 start', 0.5,
+                 min = 0, max = 5.0, step = 0.1),
+    numericInput('x2', 'x2 start', 1.5,
+                 min = 0, max = 5.0, step = 0.1),
+    checkboxInput("eql", "Equilibria", value = TRUE),
+    checkboxInput("n1", "Nullcline x1", value = FALSE),
+    checkboxInput("n2", "Nullcline x2", value = FALSE),
+    checkboxInput("dyn", "Dynamics", value = FALSE)
+    )),
+  column(7,
+         plotOutput("plot")))
+```
+```{r, echo=FALSE,message=FALSE,warning=FALSE}
+library(ggplot2)
+source("code/LV.R")
+output$plot <- renderPlot(width = 600, {
+  A <- matrix(c(input$a11, input$a12, input$a21, input$a22), 2, 2, byrow = TRUE)
+  r <- c(input$r1, input$r2)
+  pars <- list(r = r, A = A)
+  x0 <- c(x1 = input$x1, x2 = input$x2)
+  times <- seq(0, 100, by = 0.05)
+  out <- as.data.frame(ode(x0, times, LotkaVolterra, pars))
+  out[out < 0] <- 0
+    show(plotresults(out, pars, 
+                     plotEQ = input$eql,
+                    plotN1 = input$n1,
+                    plotN2 = input$n2,
+                    plotDYN = input$dyn
+                     ))
+})
+```
+
+
+
+
+
+
+## Nullclines
+
+For which value of $X_2$ does $d X_1 / dt = 0?$
 
 ## A model for consumption
 

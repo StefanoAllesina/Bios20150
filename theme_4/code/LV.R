@@ -60,12 +60,12 @@ plotresults <- function(out, pars, plotEQ = TRUE, plotN1 = TRUE, plotN2 = TRUE, 
     theme(legend.position = "bottom") 
   return(pl)
 }
-
-# test competition
-r <- c(0.5,0.5)
-A <- matrix(c(1.4, 2.7, 1.6, 2.1), 2, 2, byrow = TRUE)
-pars <- list(r = r, A = A)
-x0 <- c(x1 = 0.1, x2 = 0.3)
-times <- seq(0, 2000, by = 0.1)
-out <- as.data.frame(ode(x0, times, LotkaVolterra, pars))
-out[out < 0] <- 0
+# 
+# # test competition
+# r <- c(0.5,0.5)
+# A <- matrix(c(1.4, 2.7, 1.6, 2.1), 2, 2, byrow = TRUE)
+# pars <- list(r = r, A = A)
+# x0 <- c(x1 = 0.1, x2 = 0.3)
+# times <- seq(0, 2000, by = 0.1)
+# out <- as.data.frame(ode(x0, times, LotkaVolterra, pars))
+# out[out < 0] <- 0
