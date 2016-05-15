@@ -46,10 +46,10 @@ plotresults <- function(out, pars, plotEQ = TRUE, plotN1 = TRUE, plotN2 = TRUE, 
     pl <- pl + geom_point(size = 4, colour = NA)
   }
   if (plotN1 == TRUE){
-    pl <- pl + geom_line(data = line1, aes(x1, x2), linetype = 2)
+    pl <- pl + geom_line(data = line1, aes(x1, x2), linetype = "44")
   }
   if (plotN2 == TRUE){
-    pl <- pl + geom_line(data = line2, aes(x1, x2), linetype = 3) 
+    pl <- pl + geom_line(data = line2, aes(x1, x2), linetype = "13" )
   }
   if (plotDYN == TRUE){
     pl <- pl + geom_point(data = out, aes(x1, x2, colour =time)) + 

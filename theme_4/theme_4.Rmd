@@ -87,10 +87,15 @@ Holdo et al., 2009
 
 ## Network structure
 
+## Lorenzo Camerano: the first food web
+
+## Modern food web
+
 ## Lotka Volterra Equations
 
+## Volterra effect
 
-## Competition
+## LV Competition
 
 $\dfrac{d X_1}{dt} = X_1 \left( r_1 - A_{1,1} X_1 - A_{1,2} X_2 \right)$
 
@@ -98,7 +103,7 @@ $\dfrac{d X_2}{dt} = X_2 \left( r_2 - A_{2,2} X_2 - A_{2,1} X_1 \right)$
 
 $A_{1,1}$: intra-specific competition species 1
 
-$A_{1,2}$: inter-specific competition --- effect of species 2 on species 1
+$A_{1,2}$: inter-specific competition --- effect of species 2 on growth of species 1
 
 if $A_{1,1} > A_{1,2}$ adding a conspecific decreases growth more than adding heterospecific
 
@@ -121,10 +126,14 @@ $\dfrac{d X_1}{dt} = X_1 \left( r_1 - A_{1,1} X_1 - A_{1,2} X_2 \right)$
 $\dfrac{d X_2}{dt} = X_2 \left( r_2 - A_{2,2} X_2 - A_{2,1} X_1 \right)$
 
 Setting both equations to zero, we find:
+
 - $(X_1^*, X_2^*) = (0, 0)$ Trivial equilibrium (no populations!)
+
 - $(X_1^*, X_2^*) = \left(\frac{r_1}{A_{1,1}} , 0\right)$ Species 1 to carrying capacity; species 2 extinct
+
 - $(X_1^*, X_2^*) = \left(0, \frac{r_2}{A_{2,2}} \right)$ Species 2 to carrying capacity; species 1 extinct
-- $(X_1^*, X_2^*) =$ Most interesting equilibrium, exists only when 
+
+- $(X_1^*, X_2^*) =$ Most interesting equilibrium --- possibility of coexistence!
 
 ## Graph
 ```{r echo = FALSE, warning=FALSE, message=FALSE}
@@ -177,16 +186,65 @@ output$plot <- renderPlot(width = 600, {
 })
 ```
 
+## Nullclines
 
+For which value of $X_2$ does $d X_1 / dt = 0$?
 
+When $X_1 > 0$, we have $d X_1 / dt = 0$ whenever
 
+$r_1 - A_{1,1} X_1 - A_{1,2} X_2 = 0$
 
+$X_2 = \dfrac{r_1 - A_{1,1} X_1}{A_{1,2}}$
+
+We call this the isocline of zero-growth (or nullcline) for species 1. 
+
+This is the equation of a line with positive intercept $(r_1 / A_{1,2})$ and negative slope $(-A_{1,1} / A_{1,2})$ in the plane.
 
 ## Nullclines
 
-For which value of $X_2$ does $d X_1 / dt = 0?$
+Repeating for species 2, we find
 
-## A model for consumption
+$X_1 = \dfrac{r_2 - A_{2,2} X_2}{A_{2,1}}$ or, written in terms of $X_2$ (so that it easy to compare with the other nullcline)
+
+$X_2 = \dfrac{r_2 - A_{2,1} X_1}{A_{2,2}}$
+
+Again, a line with positive intercept $(r_2 / A_{2,2})$ and negative slope $(-A_{2,1} / A_{2,2})$.
+
+## Fourth equilibrium
+As we said above, there are up to four equilibira: 
+
+1. both species absent
+2. sp 1 present; sp 2 absent
+3. sp 2 present; sp 1 absent
+4. The fourth equilibrium (coexistence equilibrium) is found only when the two nullclines intersect.
+
+We are going to examine the four possible scenarios. For each we determine the winner by drawing arrows on the diagram, and by performing invasion analysis.
+
+## Four cases: Case 1 --- sp 1 wins
+<div class="centered">
+<img src="./images/case1.jpg" alt="c1" height="500"> 
+</div>
+
+## Four cases: Case 2 --- sp 2 wins
+<div class="centered">
+<img src="./images/case2.jpg" alt="c2" height="500"> 
+</div>
+
+## Four cases: Case 3 --- precedence
+<div class="centered">
+<img src="./images/case3.jpg" alt="c3" height="500"> 
+</div>
+
+## Four cases: Case 4 --- robust coexistence
+<div class="centered">
+<img src="./images/case4.jpg" alt="c4" height="500"> 
+</div>
+
+## The principle of competitive exclusion
+
+## More than two competitors
+
+## Competition wrapup
 
 ## Cooperation
 
