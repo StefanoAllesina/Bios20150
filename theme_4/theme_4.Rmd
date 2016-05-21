@@ -458,15 +458,13 @@ Important cases: invasive species
 
 $\frac{A_{1,2}}{A_{2,2}} < \frac{r_1}{r_2} <\frac{A_{1,1}}{A_{2,1}}$
 
-subtract $\frac{A_{1,1}}{A_{2,1}}$:
+This implies
 
-$\frac{A_{1,2}}{A_{2,2}} - \frac{A_{1,1}}{A_{2,1}} < \frac{r_1}{r_2} - \frac{A_{1,1}}{A_{2,1}}  <0$
+$\frac{A_{1,2}}{A_{2,2}} < \frac{A_{1,1}}{A_{2,1}}$
 
-which implies necessarily that:
+...meaning...
 
-$\frac{A_{1,2}A_{1,2} - A_{1,1} A_{2,2}}{A_{2,1} A_{2,2}}< 0$
-
-$A_{1,2}A_{1,2} - A_{1,1} A_{2,2} < 0$
+$A_{1,2}A_{1,2} < A_{1,1} A_{2,2}$
 
 For stable coexistence, the intra-specific effects should be stronger than inter-specific ones.
 
