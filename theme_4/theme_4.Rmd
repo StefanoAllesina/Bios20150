@@ -87,13 +87,127 @@ Holdo et al., 2009
 
 ## Network structure
 
+Ecological communities can be described by networks in which the nodes are the populations, and the edges connecting the nodes stand for ecological interactions. 
+
+Networks commonly found in the ecological literature
+
+- Food webs (who eats whom?)
+
+- Pollination networks (plant-animal; bipartite)
+
+- Herbivory (bipartite)
+
+- Parasitism (parasite/parasitoid-host; bipartite)
+
 ## Lorenzo Camerano: the first food web
+*"In 1880, Lorenzo Camerano, then a 24-year-old assistant in the laboratory of the Royal Zoological Museum of Torino, Italy, published a paper 'On the equilibrium of living beings by means of reciprocal destruction'[...]. This pioneering paper contains an early, peraphs the first, graphical representation of a food web as a network of groups of species linked by feeding relations."* (Joel Cohen, 1994)
+
+## Lorenzo Camerano: the first food web
+<div class="centered">
+<img src="./images/camerano.jpg" alt="camerano" height="500"> 
+</div>
 
 ## Modern food web
+<div class="centered">
+<img src="./images/weddell.jpg" alt="weddell" height="500"> 
+</div>
 
-## Lotka Volterra Equations
+488 species; 16,200 feeding interactions
+
+## Plant, pollinator, seed disperser network
+<div class="centered">
+<img src="./images/plantpoll.jpg" alt="plantpoll" height="500"> 
+</div>
+
+## Lotka-Volterra Equations
+
+Clearly, consumers and resources influence each others. 
+
+Can we build a mathematical model  describing the dynamics of the species?
+
+In 1926, in a short paper in Nature, Vito Volterra published an influential model, which is the progenitor of most models used today.
+
+Turns out, the same equations had been published the year before by Alfred J. Lotka, an Polish-born mathematician, physicist and statistican working in the US.
+
+## Volterra, 1926
+
+*"The first case I have considered is that of two species, of which one, finding sufficient food in its environment, would multiply indefinitely when left to itself, while the other would perish for lack of nourishment if left alone; but the second feeds upon the first, and so the two species can co-exist together."*
+
+In modern notation, we would write:
+
+$\dfrac{d X}{dt} = X (a - b Y)$
+
+$\dfrac{d Y}{dt} = Y (-d + b X)$
+
+## Dynamics
+```{r echo = FALSE, warning=FALSE, message=FALSE}
+library(ggplot2)
+source("code/LV.R")
+
+A <- matrix(c(0, 0.5, -0.5, 0), 2, 2, byrow = TRUE)
+  r <- c(0.1, -0.25)
+  pars <- list(r = r, A = A)
+  x0 <- c(x1 = 1, x2 = 0.08127632)
+  times <- seq(0, 200, by = 0.075)
+  out <- as.data.frame(ode(x0, times, LotkaVolterra, pars))
+plvdyn <- ggplot(data = out, aes(x = time, y = x1)) + geom_line(colour = "blue") +
+  geom_line(data = out, aes(x = time, y = x2), colour = "red") + theme_bw() + theme(axis.text = element_text(size = 14, face = "bold"), axis.title = element_text(size=14, face="bold")) +
+    theme(legend.position = "bottom") + xlab("time") + ylab("density") 
+show(plvdyn)  
+```
 
 ## Volterra effect
+Volterra was inspired by an observation of his son-in-law Umberto D'Ancona.
+He had noticed that the landings of predatory fish in Trieste, Fiume and Venice immediately after
+WWI had increased with respect to before the war, while that of herbivorous and planktivorous fish had not.
+
+During WWI, the Adriatic sea was covered with mines, as it was bordered by opposing forces. As such, fishery had halted, releasing the fish population from high mortality.
+
+But why would the number of predators increase, while that of prey stay about constant?
+
+## Volterra effect
+```{r echo = FALSE, warning=FALSE, message=FALSE}
+library(ggplot2)
+source("code/LV.R")
+
+A <- matrix(c(0, 0.5, -0.5, 0), 2, 2, byrow = TRUE)
+  r <- c(0.1, -0.5)
+  pars <- list(r = r, A = A)
+  x0 <- c(x1 = 1, x2 = 0.08127632)
+  times <- seq(0, 29.025, by = 0.075)
+  out <- as.data.frame(ode(x0, times, LotkaVolterra, pars))
+  plve <- ggplot(data = out, aes(x = x1, y = x2, colour = time)) + geom_point(fill = NA)
+  plve <- plve + geom_point(data = data.frame(x1 = c(1.0), x2 = c(0.2), time =100), aes(x1, x2), colour = "red", size = 5) + theme_bw() + theme(axis.text = element_text(size = 14, face = "bold"), axis.title = element_text(size=14, face="bold")) +
+    theme(legend.position = "bottom") + xlab("X") + ylab("Y") + ggtitle("Before the war --- high mortality")
+show(plve)  
+```
+
+## Volterra effect
+```{r echo = FALSE, warning=FALSE, message=FALSE}
+library(ggplot2)
+source("code/LV.R")
+
+A <- matrix(c(0, 0.5, -0.5, 0), 2, 2, byrow = TRUE)
+  r <- c(0.1, -0.5)
+  pars <- list(r = r, A = A)
+  x0 <- c(x1 = 1, x2 = 0.08127632)
+  times <- seq(0, 29.025, by = 0.075)
+  out <- as.data.frame(ode(x0, times, LotkaVolterra, pars))
+  plve2 <- ggplot(data = out, aes(x = x1, y = x2, colour = time)) + geom_polygon(fill = NA)
+  plve2 <- plve2 + geom_point(data = data.frame(x1 = c(1.0), x2 = c(0.2), time =100), aes(x1, x2), colour = "red", size = 5)
+  
+A <- matrix(c(0, 0.5, -0.5, 0), 2, 2, byrow = TRUE)
+  r <- c(0.2, -0.4)
+  pars <- list(r = r, A = A)
+  x0 <- c(x1 = 1, x2 = 0.08127632)
+  times <- seq(0, 35, by = 0.075)
+  out2 <- as.data.frame(ode(x0, times, LotkaVolterra, pars))
+  plve2 <- plve2 + geom_point(data = out2, aes(x = x1, y = x2, colour = time)) 
+  plve2 <- plve2 + geom_point(data = data.frame(x1 = c(4/5), x2 = c(0.2/0.5), time =100), aes(x1, x2), colour = "green", size = 5) + theme_bw() + theme(axis.text = element_text(size = 14, face = "bold"), axis.title = element_text(size=14, face="bold")) +
+    theme(legend.position = "bottom") + xlab("X") + ylab("Y") + ggtitle("After the war --- low mortality")
+show(plve2)  
+```
+
 
 ## LV Competition
 
@@ -101,7 +215,7 @@ $\dfrac{d X_1}{dt} = X_1 \left( r_1 - A_{1,1} X_1 - A_{1,2} X_2 \right)$
 
 $\dfrac{d X_2}{dt} = X_2 \left( r_2 - A_{2,2} X_2 - A_{2,1} X_1 \right)$
 
-$A_{1,1}$: intra-specific competition species 1
+$A_{1,1}$: intra-specific competition species 1 (crowding)
 
 $A_{1,2}$: inter-specific competition --- effect of species 2 on growth of species 1
 
@@ -109,15 +223,15 @@ if $A_{1,1} > A_{1,2}$ adding a conspecific decreases growth more than adding he
 
 ## Qualitative analysis
 
-- Determine Equilibria
+- Determine the **equilibria**
 
-- Determine isoclines of null growth (nullclines)
+- Determine the isoclines of null growth (**nullclines**)
 
-- Assess stability of equilibria graphically
+- Assess the **stability of equilibria graphically**
 
-- Assess stability using invasibility
+- Assess the **stability using invasibility**
 
-- Competitive exclusion
+- State the principle of **competitive exclusion**
 
 ## Equilibria
 
@@ -127,13 +241,49 @@ $\dfrac{d X_2}{dt} = X_2 \left( r_2 - A_{2,2} X_2 - A_{2,1} X_1 \right)$
 
 Setting both equations to zero, we find:
 
-- $(X_1^*, X_2^*) = (0, 0)$ Trivial equilibrium (no populations!)
+$(X_1^*, X_2^*) = (0, 0)$ Trivial equilibrium (no populations!)
 
-- $(X_1^*, X_2^*) = \left(\frac{r_1}{A_{1,1}} , 0\right)$ Species 1 to carrying capacity; species 2 extinct
 
-- $(X_1^*, X_2^*) = \left(0, \frac{r_2}{A_{2,2}} \right)$ Species 2 to carrying capacity; species 1 extinct
+## Equilibria
 
-- $(X_1^*, X_2^*) =$ Most interesting equilibrium --- possibility of coexistence!
+$\dfrac{d X_1}{dt} = X_1 \left( r_1 - A_{1,1} X_1 - A_{1,2} X_2 \right)$
+
+$\dfrac{d X_2}{dt} = X_2 \left( r_2 - A_{2,2} X_2 - A_{2,1} X_1 \right)$
+
+Setting both equations to zero, we find:
+
+$(X_1^*, X_2^*) = (0, 0)$ 
+
+$(X_1^*, X_2^*) = \left(\frac{r_1}{A_{1,1}} , 0\right)$ Species 1 to carrying capacity; species 2 extinct
+
+## Equilibria
+
+$\dfrac{d X_1}{dt} = X_1 \left( r_1 - A_{1,1} X_1 - A_{1,2} X_2 \right)$
+
+$\dfrac{d X_2}{dt} = X_2 \left( r_2 - A_{2,2} X_2 - A_{2,1} X_1 \right)$
+
+Setting both equations to zero, we find:
+
+$(X_1^*, X_2^*) = (0, 0)$; 
+$(X_1^*, X_2^*) = \left(\frac{r_1}{A_{1,1}} , 0\right)$ 
+
+$(X_1^*, X_2^*) = \left(0, \frac{r_2}{A_{2,2}} \right)$ Species 2 to carrying capacity; species 1 extinct
+
+## Equilibria
+
+$\dfrac{d X_1}{dt} = X_1 \left( r_1 - A_{1,1} X_1 - A_{1,2} X_2 \right)$
+
+$\dfrac{d X_2}{dt} = X_2 \left( r_2 - A_{2,2} X_2 - A_{2,1} X_1 \right)$
+
+Setting both equations to zero, we find:
+
+$(X_1^*, X_2^*) = (0, 0)$;
+$(X_1^*, X_2^*) = \left(\frac{r_1}{A_{1,1}} , 0\right)$;
+$(X_1^*, X_2^*) = \left(0, \frac{r_2}{A_{2,2}} \right)$ 
+
+$(X_1^*, X_2^*) = \left(\frac{r_1 A_{2,2} - r_2 A_{1,2}}{A_{1,1}A_{2,2}-A_{1,2}A_{2,1}}, \frac{r_2 A_{1,1} - r_1 A_{2,1}}{A_{1,1}A_{2,2}-A_{1,2}A_{2,1}} \right)$ 
+
+Most interesting equilibrium --- possibility of coexistence! (However, not always present... more on this later)
 
 ## Graph
 ```{r echo = FALSE, warning=FALSE, message=FALSE}
@@ -213,10 +363,10 @@ Again, a line with positive intercept $(r_2 / A_{2,2})$ and negative slope $(-A_
 ## Fourth equilibrium
 As we said above, there are up to four equilibira: 
 
-1. both species absent
-2. sp 1 present; sp 2 absent
-3. sp 2 present; sp 1 absent
-4. The fourth equilibrium (coexistence equilibrium) is found only when the two nullclines intersect.
+1. Both species absent
+2. Species 1 present; Species 2 absent
+3. Species 2 present; Species 1 absent
+4. The fourth equilibrium (coexistence equilibrium) is found only when the two nullclines intersect (in the positive quadrant!).
 
 We are going to examine the four possible scenarios. For each we determine the winner by drawing arrows on the diagram, and by performing invasion analysis.
 
@@ -242,9 +392,115 @@ We are going to examine the four possible scenarios. For each we determine the w
 
 ## The principle of competitive exclusion
 
+For stable coexistence, we need:
+
+$\frac{r_1}{A_{1,1}} < \frac{r_2}{A_{2,1}}$ and $\frac{r_2}{A_{2,2}} < \frac{r_1}{A_{1,2}}$
+
+Rearranging, we obtain
+
+$\frac{r_1}{r_2} < \frac{A_{1,1}}{A_{2,1}}$ and $\frac{r_1}{r_2} > \frac{A_{1,2}}{A_{2,2}}$
+
+Thus, we can have coexistence whenever:
+
+$\frac{A_{1,2}}{A_{2,2}} < \frac{r_1}{r_2} <\frac{A_{1,1}}{A_{2,1}}$
+
+## The principe of competitive exclusion
+If two species rely on very similar resources, they will compete fiercly, meaning $A_{1,1} \approx A_{1,2}$. 
+
+$\frac{A_{1,2}}{A_{2,2}} < \frac{r_1}{r_2} <\frac{A_{1,1}}{A_{2,1}}$
+
+For simplicity, set $A_{1,1} = A_{2,2} = 1$, and symmetric competition, $A_{1,2} = A_{2,1} = \alpha$. Then
+
+$\alpha < \frac{r_1}{r_2} <\frac{1}{\alpha}$
+
+For $\alpha = 0.1$, we can choose $r_1$ and $r_2$ quite freely
+
+$0.1 < \frac{r_1}{r_2} < 10$
+
+$0.1 r_2 < r_1 <  10 r_2$
+
+## The principe of competitive exclusion
+If two species rely on very similar resources, they will compete fiercly, meaning $A_{1,1} \approx A_{1,2}$. 
+
+$\frac{A_{1,2}}{A_{2,2}} < \frac{r_1}{r_2} <\frac{A_{1,1}}{A_{2,1}}$
+
+For simplicity, set $A_{1,1} = A_{2,2} = 1$, and symmetric competition, $A_{1,2} = A_{2,1} = \alpha$. Then
+
+$\alpha < \frac{r_1}{r_2} <\frac{1}{\alpha}$
+
+...for $\alpha = 0.5$, we are much more constrained...
+
+$0.5 r_2 < r_1 <  2 r_2$
+
+## The principe of competitive exclusion
+If two species rely on very similar resources, they will compete fiercly, meaning $A_{1,1} \approx A_{1,2}$. 
+
+$\frac{A_{1,2}}{A_{2,2}} < \frac{r_1}{r_2} <\frac{A_{1,1}}{A_{2,1}}$
+
+For simplicity, set $A_{1,1} = A_{2,2} = 1$, and symmetric competition, $A_{1,2} = A_{2,1} = \alpha$. Then
+
+$\alpha < \frac{r_1}{r_2} <\frac{1}{\alpha}$
+
+...and for $\alpha = 0.9$, we need to "fine tune"...
+
+$0.9 r_2 < r_1 <  1.1111 r_2$
+
+
+## The principe of competitive exclusion
+
+Two complete competitors (i.e., using the exact same resources) cannot coexist: even the slightest advantage would lead to exclusion.
+
+Important cases: invasive species
+
+**The invasive fire ant (*Solenopsis invicta*), for example, has had a devastating effect on the arthropod biota that it encounters. In a detailed study in Texas, it was found that this fire ant reduced native ant diversity by 70% and the total number of native ant individuals by 90%, apparently by competitive exclusion. [...] superior competition for food resources has resulted in the replacement of the native gecko, *Lepidodactylus lugubris*, by the invading *Hemidactylus frenatus*, throughout the Pacific. A higher resource-use efficiency of the available food resources has been implicated in the competitive superiority of the introduced snail *Batillaria attramentaria* over the native mud snail *Cerithidea californica* in the salt marshes and mud flats of northern California** (Mooney & Cleland, PNAS 2001)
+
+## Intra- vs Inter-specific competition
+
+$\frac{A_{1,2}}{A_{2,2}} < \frac{r_1}{r_2} <\frac{A_{1,1}}{A_{2,1}}$
+
+subtract $\frac{A_{1,1}}{A_{2,1}}$:
+
+$\frac{A_{1,2}}{A_{2,2}} - \frac{A_{1,1}}{A_{2,1}} < \frac{r_1}{r_2} - \frac{A_{1,1}}{A_{2,1}}  <0$
+
+which implies necessarily that:
+
+$\frac{A_{1,2}A_{1,2} - A_{1,1} A_{2,2}}{A_{2,1} A_{2,2}}< 0$
+
+$A_{1,2}A_{1,2} - A_{1,1} A_{2,2} < 0$
+
+For stable coexistence, the intra-specific effects should be stronger than inter-specific ones.
+
 ## More than two competitors
 
+Unfortunately, the simple condition that "intra-specific competition must exceed inter-specific competition for coexsistence" does not hold for more than two competitiors!
+
+For more than two species, we can have more interesting dynamics...
+
+See [this repository](https://github.com/dysordys/intra-inter) for a new manuscript on this topic
+
+## 3 Competitors: Limit cycles
+
+<div class="centered">
+<img src="./images/limitcycle_3.jpg" alt="cycle" height="500"> 
+</div>
+
+## 4 Competitors: Chaos
+
+<div class="centered">
+<img src="./images/chaos_4.jpg" alt="chaos" height="500"> 
+</div>
+
 ## Competition wrapup
+
+- Competition is fundamental for both ecology and evolution
+
+- The same model examined here is at the basis of population genetics (can a mutant spread and "invade" the wildtype?)
+
+- For two competitors, the analysis is simple and unequivocal: if two species are competing strongly, one will take over
+
+- Competitive exclusion has been documented following the introduction of invasive species
+
+- For more than two competitors, the picture is much more complex
 
 ## Cooperation
 
@@ -674,8 +930,80 @@ Nowak and May, 1992
 ## Cooperation wrapup
 
 - Cooperation can emerge through mutations in an otherwise non-cooperative population.
+- This means that cooperative strategies could be selected by evolution.
 - However, a cycle ensues in which cooperative strategies raise and fall.
 - Many mechanisms can give rise to cooperative behavior, including direct reciprocity, indirect reciprocity, spatial patterns, and group/kin selection.
 
 ## Interactions matter
+
+In all these examples, we've seen that interactions between individuals or populations can change dramatically the behavior of biological systems.
+
+Much of modern biology is centered around the role of interactions, be it between genes (epistasis, gene-regulation), individuals (sociobiology, behavior), populations (microbiomes, community ecology) or even ecosystems (landscape ecology).
+
+From a theoretical standpoint, we're very constrained: a number of models have been succesful at explaining relations between a handful of agents, but rarely we've been able to say something significant for large assemblages and networks of interacting agents.
+
+## Interactions matter
+
+Despite these limitations, there is a mounting interest in taking a more holistic approach, and consider how networks of interacting agents could be key for our understanding of health (can your microbiome make you resistant to infections?), fisheries (how much can we fish? It depends on other species!), conservation biology (will this invader establish?), and even finance (network of lending between banks) and society (migrations, mobility).
+
+
+## Thinking like an ecologist
+
+Biological systems:
+
+- Are **large**
+
+- Are **dynamic**
+
+- Contain **feedback loops**
+
+- Are **nonlinear**
+
+- Possess **network structure**
+
+- Are **adaptive**
+
+- Can have **mutliple attractors**
+
+
+## I want to learn more ecology
+
+- **BIOS 20196. ECOLOGY AND CONSERVATION** (Undergraduate, Cathy Pfister & Eric Larsen, AU)
+
+- **BIOS 13107. ENVIRONMENTAL ECOLOGY** (Undergraduate, Trevor Price, WI)
+
+- **BIOS 23289. MARINE ECOLOGY** (Undergraduate, Tim Wootton, WI)
+
+- **BIOS 23409. THE ECOLOGY AND EVOLUTION OF INFECTIOUS DISEASES** (Undergraduate, Greg Dwyer, SP)
+
+- **ECEV 42600. COMMUNITY ECOLOGY** (Graduate, Tim Wootton, AU)
+
+- **ECEV 42800. POPULATION ECOLOGY** (Graduate, Cathy Pfister, WI)
+
+- **ECEV 42900. THEORETICAL ECOLOGY** (Graduate, Greg Dwyer & Sarah Cobey, WI)
+
+## I want to do research in ecology
+
+- **Allesina Lab** (allesinalab.uchicago.edu): theoretical ecology, networks, mathematical biology
+
+- **Cobey Lab** (cobeylab.uchicago.edu): theory of host-pathogen systems, pathogen evolution, influenza
+
+- **Dwyer Lab** (dwyerlab.uchicago.edu): ecology and evolution of infectious diseases. Theory + field work!
+
+- **Pascual Lab** Infectious diseases and climate. Malaria, cholera, influenza. Mathematical and statistical modeling.
+
+- **Pfister/Wootton Lab** (pfisterlab.uchicago.edu woottonlab.uchicago.edu) Community ecology of intertidal systems. 20+ years studying ecology at Tatoosh Island.
+
+## Thank You!
+
+For any question/comment/feedback/... on the material, write me at:
+
+sallesina@uchicago.edu
+
+or stop by Zoology 403A, and I'll buy you an espresso!
+
+
+
+
+
 
