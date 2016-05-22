@@ -52,7 +52,7 @@ output:
 <img src="./images/fire.jpg" alt="fire" height="360"> 
 </div>
 
-## The players: Wilderbeest
+## The players: Wildebeest
 
 <div class="centered">
 <img src="./images/wilderbeest.jpg" alt="wilderbeest" height="360"> 
@@ -100,7 +100,7 @@ Networks commonly found in the ecological literature
 - Parasitism (parasite/parasitoid-host; bipartite)
 
 ## Lorenzo Camerano: the first food web
-*"In 1880, Lorenzo Camerano, then a 24-year-old assistant in the laboratory of the Royal Zoological Museum of Torino, Italy, published a paper 'On the equilibrium of living beings by means of reciprocal destruction'[...]. This pioneering paper contains an early, peraphs the first, graphical representation of a food web as a network of groups of species linked by feeding relations."* (Joel Cohen, 1994)
+*"In 1880, Lorenzo Camerano, then a 24-year-old assistant in the laboratory of the Royal Zoological Museum of Torino, Italy, published a paper 'On the equilibrium of living beings by means of reciprocal destruction'[...]. This pioneering paper contains an early, perhaps the first, graphical representation of a food web as a network of groups of species linked by feeding relations."* (Joel Cohen, 1994)
 
 ## Lorenzo Camerano: the first food web
 <div class="centered">
@@ -127,7 +127,7 @@ Can we build a mathematical model  describing the dynamics of the species?
 
 In 1926, in a short paper in Nature, Vito Volterra published an influential model, which is the progenitor of most models used today.
 
-Turns out, the same equations had been published the year before by Alfred J. Lotka, an Polish-born mathematician, physicist and statistican working in the US.
+Turns out, the same equations had been published the year before by Alfred J. Lotka, an Polish-born mathematician, physicist and statistician working in the US.
 
 ## Volterra, 1926
 
@@ -404,8 +404,8 @@ Thus, we can have coexistence whenever:
 
 $\frac{A_{1,2}}{A_{2,2}} < \frac{r_1}{r_2} <\frac{A_{1,1}}{A_{2,1}}$
 
-## The principe of competitive exclusion
-If two species rely on very similar resources, they will compete fiercly, meaning $A_{1,1} \approx A_{1,2}$. 
+## The principle of competitive exclusion
+If two species rely on very similar resources, they will compete fiercely, meaning $A_{1,1} \approx A_{1,2}$. 
 
 $\frac{A_{1,2}}{A_{2,2}} < \frac{r_1}{r_2} <\frac{A_{1,1}}{A_{2,1}}$
 
@@ -419,8 +419,8 @@ $0.1 < \frac{r_1}{r_2} < 10$
 
 $0.1 r_2 < r_1 <  10 r_2$
 
-## The principe of competitive exclusion
-If two species rely on very similar resources, they will compete fiercly, meaning $A_{1,1} \approx A_{1,2}$. 
+## The principle of competitive exclusion
+If two species rely on very similar resources, they will compete fiercely, meaning $A_{1,1} \approx A_{1,2}$. 
 
 $\frac{A_{1,2}}{A_{2,2}} < \frac{r_1}{r_2} <\frac{A_{1,1}}{A_{2,1}}$
 
@@ -432,8 +432,8 @@ $\alpha < \frac{r_1}{r_2} <\frac{1}{\alpha}$
 
 $0.5 r_2 < r_1 <  2 r_2$
 
-## The principe of competitive exclusion
-If two species rely on very similar resources, they will compete fiercly, meaning $A_{1,1} \approx A_{1,2}$. 
+## The principle of competitive exclusion
+If two species rely on very similar resources, they will compete fiercely, meaning $A_{1,1} \approx A_{1,2}$. 
 
 $\frac{A_{1,2}}{A_{2,2}} < \frac{r_1}{r_2} <\frac{A_{1,1}}{A_{2,1}}$
 
@@ -446,7 +446,7 @@ $\alpha < \frac{r_1}{r_2} <\frac{1}{\alpha}$
 $0.9 r_2 < r_1 <  1.1111 r_2$
 
 
-## The principe of competitive exclusion
+## The principle of competitive exclusion
 
 Two complete competitors (i.e., using the exact same resources) cannot coexist: even the slightest advantage would lead to exclusion.
 
@@ -470,7 +470,7 @@ For stable coexistence, the intra-specific effects should be stronger than inter
 
 ## More than two competitors
 
-Unfortunately, the simple condition that "intra-specific competition must exceed inter-specific competition for coexsistence" does not hold for more than two competitiors!
+Unfortunately, the simple condition that "intra-specific competition must exceed inter-specific competition for coexistence" does not hold for more than two competitors!
 
 For more than two species, we can have more interesting dynamics...
 
@@ -502,7 +502,7 @@ See [this repository](https://github.com/dysordys/intra-inter) for a new manuscr
 
 ## Cooperation
 
-- Cooperation within cells --- is origin of eukaryotic organelles endosymbiontic?
+- Cooperation within cells --- is origin of eukaryotic organelles endosymbiotic?
 
 - Cooperation between cells --- multicellularity
 
@@ -510,11 +510,11 @@ See [this repository](https://github.com/dysordys/intra-inter) for a new manuscr
 
 - Cooperation between species --- mutualism, symbiosis
 
-## Cooperation is a selfish world $\Pi$
+## Cooperation in a selfish world $\Pi$
 
 Traditionally, cooperation has been seen as problematic for evolution: 
 
-*"As Darwin appreciated, cooperative behaviour--actions adapted to assist others that involve costs to the fitness of participants--poses a fundamental problem to the traditional theory of natural selection, which rests on the assumption that individuals compete to survive and breed"* (Clutton-Brock, 2009)
+*"As Darwin appreciated, cooperative behavior--actions adapted to assist others that involve costs to the fitness of participants--poses a fundamental problem to the traditional theory of natural selection, which rests on the assumption that individuals compete to survive and breed"* (Clutton-Brock, 2009)
 
 *Natural selection cannot possibly produce any modification in a species exclusively for the good of another species; though throughout nature one species incessantly takes advantage of, and profits by the structures of others. [...] If it could be proved that any part of the structure of any one species had been formed for the exclusive good of another species, it would annihilate my theory, for such could not have been produced through natural selection* (Darwin, On the origin of species, 1859)
 
@@ -794,7 +794,7 @@ renderPlot(height = 400, width = 800, {
 - Average payoff of Player 1: $\pi (\mathbf{p'}, \mathbf{q'}) = \mathbf{v} \mathbf{h_1}$, where $\mathbf{h_1} = \left\{ 1, 0, 1 + k, k\right\}$
 - Average payoff of Player 2: $\pi (\mathbf{q'}, \mathbf{p'}) = \mathbf{v} \mathbf{h_2}$, where $\mathbf{h_2} = \left\{ 1, 1 + k, 0, k\right\}$
 
-## Avergage Fitness
+## Average Fitness
 
 ```{r echo = FALSE, warning=FALSE, message=FALSE}
 fluidRow(
@@ -938,7 +938,7 @@ In all these examples, we've seen that interactions between individuals or popul
 
 Much of modern biology is centered around the role of interactions, be it between genes (epistasis, gene-regulation), individuals (sociobiology, behavior), populations (microbiomes, community ecology) or even ecosystems (landscape ecology).
 
-From a theoretical standpoint, we're very constrained: a number of models have been succesful at explaining relations between a handful of agents, but rarely we've been able to say something significant for large assemblages and networks of interacting agents.
+From a theoretical standpoint, we're very constrained: a number of models have been successful at explaining relations between a handful of agents, but rarely we've been able to say something significant for large assemblages and networks of interacting agents.
 
 ## Interactions matter
 
@@ -961,7 +961,7 @@ Biological systems:
 
 - Are **adaptive**
 
-- Can have **mutliple attractors**
+- Can have **multiple attractors**
 
 
 ## I want to learn more ecology
