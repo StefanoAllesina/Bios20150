@@ -966,13 +966,25 @@ Biological systems:
 
 ## I want to learn more ecology
 
-- **BIOS 20196. ECOLOGY AND CONSERVATION** (Undergraduate, Cathy Pfister & Eric Larsen, AU)
-
 - **BIOS 13107. ENVIRONMENTAL ECOLOGY** (Undergraduate, Trevor Price, WI)
+
+- **BIOS 13126. TROPICAL ECOLOGY** (Undergraduate, Eric Larsen, WI)
+
+- **BIOS 13128. PLANT-ANIMAL INTERACTIONS** (Undergraduate, Alison Hunter, WI)
+
+- **BIOS 20196. ECOLOGY AND CONSERVATION** (Undergraduate, Cathy Pfister & Eric Larsen, AU)
 
 - **BIOS 23289. MARINE ECOLOGY** (Undergraduate, Tim Wootton, WI)
 
+- **BIOS 23232/33. ECOLOGY AND EVOLUTION IN THE SOUTHWEST** (Undegraduate, Eric Larsen, SP)
+
+## I want to learn more ecology
+
+- **BIOS 23254. MAMMALIAN ECOLOGY** (Undegraduate, Eric Larsen, SP)
+
 - **BIOS 23409. THE ECOLOGY AND EVOLUTION OF INFECTIOUS DISEASES** (Undergraduate, Greg Dwyer, SP)
+
+- **BIOS 23410. COMPLEX INTERACTIONS** (Undergraduate, Thorsten Lumbsch, SP)
 
 - **ECEV 42600. COMMUNITY ECOLOGY** (Graduate, Tim Wootton, AU)
 
