@@ -382,12 +382,12 @@ We are going to examine the four possible scenarios. For each we determine the w
 
 ## Four cases: Case 3 --- precedence
 <div class="centered">
-<img src="./images/case3.jpg" alt="c3" height="500"> 
+<img src="./images/case4.jpg" alt="c4" height="500"> 
 </div>
 
 ## Four cases: Case 4 --- robust coexistence
 <div class="centered">
-<img src="./images/case4.jpg" alt="c4" height="500"> 
+<img src="./images/case3.jpg" alt="c3" height="500"> 
 </div>
 
 ## The principle of competitive exclusion
