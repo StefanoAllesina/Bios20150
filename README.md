@@ -1,6 +1,6 @@
 # Bios20150
 
-Material for the ecology portion of the class BIOS 20150 *How Can We Understand the Biosphere?*, taught at the University of Chicago in the Spring Quarter of 2016. The material was prepared by [yours truly](http://allesinalab.uchicago.edu/?page_id=2).
+Material for the ecology portion of the class BIOS 20150 *How Can We Understand the Biosphere?*, taught at the University of Chicago in the Spring Quarter of 2017. The material was prepared by [yours truly](http://allesinalab.uchicago.edu/?page_id=2).
 
 This repository contains slides, data and readings for each of the four themes we are going to explore in class:
 
@@ -24,6 +24,8 @@ You can also browse the material online:
 ### Here are the slides: 
 - Theme 1 [RMarkDown](https://github.com/StefanoAllesina/Bios20150/blob/master/theme_1/theme_1.Rmd) [PDF](https://github.com/StefanoAllesina/Bios20150/blob/master/theme_1/theme_1.pdf)
 - Theme 2 [RMarkDown](https://github.com/StefanoAllesina/Bios20150/blob/master/theme_2/theme_2.Rmd) [PDF](https://github.com/StefanoAllesina/Bios20150/blob/master/theme_2/theme_2.pdf)
+- Theme 3 [RMarkDown](https://github.com/StefanoAllesina/Bios20150/blob/master/theme_3/theme_3.Rmd) [PDF](https://github.com/StefanoAllesina/Bios20150/blob/master/theme_3/theme_3.pdf)
+- Theme 4 [RMarkDown](https://github.com/StefanoAllesina/Bios20150/blob/master/theme_4/theme_4.Rmd) [PDF](https://github.com/StefanoAllesina/Bios20150/blob/master/theme_4/theme_4.pdf)
 
 The folder for each theme also contains the data and readings.
 
