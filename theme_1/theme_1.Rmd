@@ -836,4 +836,4 @@ show(pl_halley_bar)
 
 - Human populations follow a demographic transition, going from high mortality and high natality, to low mortality and low natality.
 
-- The stage in which mortality is low and birth rates are still high has a rapid rise in population numbers. 
+- The stage in which mortality is low and birth rates are still high yields a rapid rise in population numbers. 
