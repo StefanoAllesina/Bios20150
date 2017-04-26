@@ -40,7 +40,7 @@ output:
 
 ## Bistability
 
-A dynamical system is **bistable** if it has **two equilibrium states**. 
+A dynamical system is **bistable** if it has **two stable equilibrium states**. 
 
 Bistability is a special case of systems with multiple **alternative stable states**.
 
@@ -93,7 +93,7 @@ Bistability is a special case of systems with multiple **alternative stable stat
 ## Allee effect
 Warder Clyde Allee (a professor at U of C) in the 1930s conducted a series of experiments to test whether goldfish grown in a tank containing silver suspension (toxic) would grow better in isolation, or in groups. Because each fish would absorb part of the toxic compounds, fish grown in tanks with other conspecifics would live longer than isolated fishes. 
 
-The idea that populations could grow faster when in groups than in isolation came to be known as the *Allee effect* in the 1950s. Possible processed leading to an Allee effect are:
+The idea that populations could grow faster when in groups than in isolation came to be known as the *Allee effect* in the 1950s. Possible processes leading to an Allee effect are:
 
 - finding a mate can be hard when the population is at low abundance.
 - social cooperation could help escaping predators.
