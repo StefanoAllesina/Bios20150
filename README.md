@@ -24,7 +24,7 @@ You can also browse the material online:
 ### Here are the slides: 
 - Theme 1 [RMarkDown](https://github.com/StefanoAllesina/Bios20150/blob/master/theme_1/theme_1.Rmd) [Summary](https://github.com/StefanoAllesina/Bios20150/blob/master/theme_1/theme_1_summary.pdf)
 - Theme 2 [RMarkDown](https://github.com/StefanoAllesina/Bios20150/blob/master/theme_2/theme_2.Rmd) [Summary](https://github.com/StefanoAllesina/Bios20150/blob/master/theme_2/theme_2_summary.pdf)
-- Theme 3 [RMarkDown](https://github.com/StefanoAllesina/Bios20150/blob/master/theme_3/theme_3.Rmd) Summary
+- Theme 3 [RMarkDown](https://github.com/StefanoAllesina/Bios20150/blob/master/theme_3/theme_3.Rmd) [Summary](https://github.com/StefanoAllesina/Bios20150/blob/master/theme_3/theme_3_summary.pdf)
 - Theme 4 [RMarkDown](https://github.com/StefanoAllesina/Bios20150/blob/master/theme_4/theme_4.Rmd) Summary
 
 The folder for each theme also contains the data and readings.
