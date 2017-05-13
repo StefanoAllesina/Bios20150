@@ -427,7 +427,7 @@ We have spread of the disease whenever
 
 $\beta S(t) I(t) - \gamma I(t) - \mu I(t) > 0$
 
-divdie by $I(t)$, and set $S(t) = N$
+divide by $I(t)$, and set $S(t) = N$
 
 $\beta N - \gamma - \mu > 0$
 
@@ -483,7 +483,7 @@ If we achieve this **critical level of vaccination**, we have **herd immunity**:
 - Thanks to mass vaccination, measles was eliminated from the US in 2000. 
 - However, measles is still diffused elsewhere in the world, and travelers can bring the infection into the country.
 - Because many parents refuse to vaccinate their children, the number of cases is on the rise:
-- 2010, 63 cases; 2011, 220; 2012, 55; 2013, 187; 2014, 667.
+- 2010, 63 cases; 2011, 220; 2012, 55; 2013, 187; 2014, 667; 2015, 188; 2016, 70.
 - In 2015, the first measles-related death since 2003. 
 - Mass vaccination provides herd immunity for more fragile subjects (e.g. immunodepressed); falling below critical vaccination would lead to the resurgence of the disease. 
 
