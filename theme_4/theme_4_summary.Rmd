@@ -1,0 +1,768 @@
+---
+title: "Interactions"
+author: "Stefano Allesina"
+date: ""
+
+output:
+  pdf_document: default
+html_document: default
+---
+
+## The network of interactions
+**It is interesting to contemplate a tangled bank, clothed with many plants of many kinds, with birds singing on the bushes, with various insects flitting about, and with worms crawling through the damp earth, and to reflect that these elaborately constructed forms, so different from each other, and dependent upon each other in so complex a manner, have all been produced by laws acting around us.**
+*On the Origin of Species (1859) by Charles Darwin*
+
+**If you look at the world in a certain way, everything is connected to everything else.**
+*Foucault's Pendulum (1988) by Umberto Eco* 
+
+## Interactions at play in the Serengeti
+\includegraphics[width = 0.7\textwidth]{./images/Serengeti.jpg}
+
+## Tree growth (Packer et al. Science 2005)
+
+\includegraphics[width = 0.8\textwidth]{./images/Treegrowth.jpg}
+
+## The players: Trees
+
+\includegraphics[width = 0.7\textwidth]{./images/trees.jpg}
+
+## The players: Elephants
+
+\includegraphics[width = 0.7\textwidth]{./images/elephant.jpg}
+
+## The players: Grass
+
+\includegraphics[width = 0.9\textwidth]{./images/grass.jpg}
+
+## The players: Fire
+
+\includegraphics[width = 0.9\textwidth]{./images/fire.jpg}
+
+## The players: Wildebeest
+
+\includegraphics[width = 0.9\textwidth]{./images/wilderbeest.jpg}
+
+## The players: A virus?!
+
+\includegraphics[width = 0.6\textwidth]{./images/rinderpest.jpg}
+
+## Interactions at play in the Serengeti
+
+\includegraphics[width = 0.9\textwidth]{./images/chain_sere.jpg}
+
+Holdo et al., 2009
+
+## Types of interaction between species
+
+- *Competition (-, -)*
+
+- *Antagonism (+, -)*, e.g., consumption, parasitism.
+
+- *Mutualism (+, +)*, e.g., pollination, seed-dispersal, symbiosis
+
+- *Amensalism (-, 0)* 
+
+- *Commensalism (+, 0)*
+
+## Network structure
+
+Ecological communities can be described by networks in which the nodes are the populations, and the edges connecting the nodes stand for ecological interactions. 
+
+Networks commonly found in the ecological literature
+
+- Food webs (who eats whom?)
+
+- Pollination networks (plant-animal; bipartite)
+
+- Herbivory (bipartite)
+
+- Parasitism (parasite/parasitoid-host; bipartite)
+
+## Lorenzo Camerano: the first food web
+*"In 1880, Lorenzo Camerano, then a 24-year-old assistant in the laboratory of the Royal Zoological Museum of Torino, Italy, published a paper 'On the equilibrium of living beings by means of reciprocal destruction'[...]. This pioneering paper contains an early, perhaps the first, graphical representation of a food web as a network of groups of species linked by feeding relations."* (Joel Cohen, 1994)
+
+## Lorenzo Camerano: the first food web
+\includegraphics[width = 1.5\linewidth]{./images/camerano.jpg}
+
+## Modern food web
+\includegraphics[width = 0.6\textwidth]{./images/weddell.jpg}
+
+488 species; 16,200 feeding interactions
+
+## Plant, pollinator, seed disperser network
+\includegraphics[width = 0.9\textwidth]{./images/plantpoll.jpg}
+
+## Lotka-Volterra Equations
+
+Clearly, consumers and resources influence each others. 
+
+Can we build a mathematical model  describing the dynamics of the species?
+
+In 1926, in a short paper in Nature, Vito Volterra published an influential model, which is the progenitor of most models used today.
+
+Turns out, the same equations had been published the year before by Alfred J. Lotka, an Polish-born mathematician, physicist and statistician working in the US.
+
+## Volterra, 1926
+
+*"The first case I have considered is that of two species, of which one, finding sufficient food in its environment, would multiply indefinitely when left to itself, while the other would perish for lack of nourishment if left alone; but the second feeds upon the first, and so the two species can co-exist together."*
+
+In modern notation, we would write:
+
+$\dfrac{d X}{dt} = X (a - b Y)$
+
+$\dfrac{d Y}{dt} = Y (-d + b X)$
+
+## Dynamics
+```{r echo = FALSE, warning=FALSE, message=FALSE, fig.width=4.5, fig.height=3}
+library(ggplot2)
+source("code/LV.R")
+
+A <- matrix(c(0, 0.5, -0.5, 0), 2, 2, byrow = TRUE)
+  r <- c(0.1, -0.25)
+  pars <- list(r = r, A = A)
+  x0 <- c(x1 = 1, x2 = 0.08127632)
+  times <- seq(0, 200, by = 0.075)
+  out <- as.data.frame(ode(x0, times, LotkaVolterra, pars))
+plvdyn <- ggplot(data = out, aes(x = time, y = x1)) + geom_line(colour = "blue") +
+  geom_line(data = out, aes(x = time, y = x2), colour = "red") + theme_bw() + theme(axis.text = element_text(size = 14, face = "bold"), axis.title = element_text(size=14, face="bold")) +
+    theme(legend.position = "bottom") + xlab("time") + ylab("density") 
+show(plvdyn)  
+```
+
+## Volterra effect
+Volterra was inspired by an observation of his son-in-law Umberto D'Ancona.
+He had noticed that the landings of predatory fish in Trieste, Fiume and Venice immediately after
+WWI had increased with respect to before the war, while that of herbivorous and planktivorous fish had not.
+
+During WWI, the Adriatic sea was covered with mines, as it was bordered by opposing forces. As such, fishery had halted, releasing the fish population from high mortality.
+
+But why would the number of predators increase, while that of prey stay about constant?
+
+```{r echo = FALSE, warning=FALSE, message=FALSE, fig.width=4.5, fig.height=3}
+library(ggplot2)
+source("code/LV.R")
+
+A <- matrix(c(0, 0.5, -0.5, 0), 2, 2, byrow = TRUE)
+  r <- c(0.1, -0.5)
+  pars <- list(r = r, A = A)
+  x0 <- c(x1 = 1, x2 = 0.08127632)
+  times <- seq(0, 29.025, by = 0.075)
+  out <- as.data.frame(ode(x0, times, LotkaVolterra, pars))
+  plve <- ggplot(data = out, aes(x = x1, y = x2, colour = time)) + geom_point(fill = NA)
+  plve <- plve + geom_point(data = data.frame(x1 = c(1.0), x2 = c(0.2), time =100), aes(x1, x2), colour = "red", size = 5) + theme_bw() + theme(axis.text = element_text(size = 14, face = "bold"), axis.title = element_text(size=14, face="bold")) +
+    theme(legend.position = "bottom") + xlab("X") + ylab("Y") + ggtitle("Before the war --- high mortality")
+show(plve)  
+```
+
+```{r echo = FALSE, warning=FALSE, message=FALSE, fig.width=4.5, fig.height=3}
+library(ggplot2)
+source("code/LV.R")
+
+A <- matrix(c(0, 0.5, -0.5, 0), 2, 2, byrow = TRUE)
+  r <- c(0.1, -0.5)
+  pars <- list(r = r, A = A)
+  x0 <- c(x1 = 1, x2 = 0.08127632)
+  times <- seq(0, 29.025, by = 0.075)
+  out <- as.data.frame(ode(x0, times, LotkaVolterra, pars))
+  plve2 <- ggplot(data = out, aes(x = x1, y = x2, colour = time)) + geom_polygon(fill = NA)
+  plve2 <- plve2 + geom_point(data = data.frame(x1 = c(1.0), x2 = c(0.2), time =100), aes(x1, x2), colour = "red", size = 5)
+  
+A <- matrix(c(0, 0.5, -0.5, 0), 2, 2, byrow = TRUE)
+  r <- c(0.2, -0.4)
+  pars <- list(r = r, A = A)
+  x0 <- c(x1 = 1, x2 = 0.08127632)
+  times <- seq(0, 35, by = 0.075)
+  out2 <- as.data.frame(ode(x0, times, LotkaVolterra, pars))
+  plve2 <- plve2 + geom_point(data = out2, aes(x = x1, y = x2, colour = time)) 
+  plve2 <- plve2 + geom_point(data = data.frame(x1 = c(4/5), x2 = c(0.2/0.5), time =100), aes(x1, x2), colour = "green", size = 5) + theme_bw() + theme(axis.text = element_text(size = 14, face = "bold"), axis.title = element_text(size=14, face="bold")) +
+    theme(legend.position = "bottom") + xlab("X") + ylab("Y") + ggtitle("After the war --- low mortality")
+show(plve2)  
+```
+
+## LV Competition
+
+$\dfrac{d X_1}{dt} = X_1 \left( r_1 - A_{1,1} X_1 - A_{1,2} X_2 \right)$
+
+$\dfrac{d X_2}{dt} = X_2 \left( r_2 - A_{2,2} X_2 - A_{2,1} X_1 \right)$
+
+$A_{1,1}$: intra-specific competition species 1 (crowding)
+
+$A_{1,2}$: inter-specific competition --- effect of species 2 on growth of species 1
+
+if $A_{1,1} > A_{1,2}$ adding a conspecific decreases growth more than adding heterospecific
+
+## Qualitative analysis
+
+- Determine the **equilibria**
+
+- Determine the isoclines of null growth (**nullclines**)
+
+- Assess the **stability of equilibria graphically**
+
+- Assess the **stability using invasibility**
+
+- State the principle of **competitive exclusion**
+
+## Equilibria
+
+$\dfrac{d X_1}{dt} = X_1 \left( r_1 - A_{1,1} X_1 - A_{1,2} X_2 \right)$
+
+$\dfrac{d X_2}{dt} = X_2 \left( r_2 - A_{2,2} X_2 - A_{2,1} X_1 \right)$
+
+Setting both equations to zero, we find:
+
+$(X_1^*, X_2^*) = (0, 0)$ Trivial equilibrium (no populations!)
+
+$(X_1^*, X_2^*) = \left(\frac{r_1}{A_{1,1}} , 0\right)$ Species 1 to carrying capacity; species 2 extinct
+
+$(X_1^*, X_2^*) = \left(0, \frac{r_2}{A_{2,2}} \right)$ Species 2 to carrying capacity; species 1 extinct
+
+$(X_1^*, X_2^*) = \left(\frac{r_1 A_{2,2} - r_2 A_{1,2}}{A_{1,1}A_{2,2}-A_{1,2}A_{2,1}}, \frac{r_2 A_{1,1} - r_1 A_{2,1}}{A_{1,1}A_{2,2}-A_{1,2}A_{2,1}} \right)$ 
+
+Most interesting equilibrium --- possibility of coexistence! (However, not always present... more on this later)
+
+## Nullclines
+
+For which value of $X_2$ does $d X_1 / dt = 0$?
+
+When $X_1 > 0$, we have $d X_1 / dt = 0$ whenever
+
+$r_1 - A_{1,1} X_1 - A_{1,2} X_2 = 0$
+
+$X_2 = \dfrac{r_1 - A_{1,1} X_1}{A_{1,2}}$
+
+We call this the isocline of zero-growth (or nullcline) for species 1. 
+
+This is the equation of a line with positive intercept $(r_1 / A_{1,2})$ and negative slope $(-A_{1,1} / A_{1,2})$ in the plane.
+
+Repeating for species 2, we find
+
+$X_1 = \dfrac{r_2 - A_{2,2} X_2}{A_{2,1}}$ or, written in terms of $X_2$ (so that it easy to compare with the other nullcline)
+
+$X_2 = \dfrac{r_2 - A_{2,1} X_1}{A_{2,2}}$
+
+Again, a line with positive intercept $(r_2 / A_{2,2})$ and negative slope $(-A_{2,1} / A_{2,2})$.
+
+## Fourth equilibrium
+As we said above, there are up to four equilibira: 
+
+1. Both species absent
+2. Species 1 present; Species 2 absent
+3. Species 2 present; Species 1 absent
+4. The fourth equilibrium (coexistence equilibrium) is found only when the two nullclines intersect (in the positive quadrant!).
+
+We are going to examine the four possible scenarios. For each we determine the winner by drawing arrows on the diagram, and by performing invasion analysis.
+
+## Four cases: Case 1 --- sp 1 wins
+\includegraphics[width = 0.9\textwidth]{./images/case1.jpg}
+
+## Four cases: Case 2 --- sp 2 wins
+\includegraphics[width = 0.9\textwidth]{./images/case2.jpg}
+
+## Four cases: Case 3 --- precedence
+\includegraphics[width = 0.9\textwidth]{./images/case4.jpg}
+
+## Four cases: Case 4 --- robust coexistence
+\includegraphics[width = 0.9\textwidth]{./images/case3.jpg}
+
+## The principle of competitive exclusion
+
+For stable coexistence, we need:
+
+$\frac{r_1}{A_{1,1}} < \frac{r_2}{A_{2,1}}$ and $\frac{r_2}{A_{2,2}} < \frac{r_1}{A_{1,2}}$
+
+Rearranging, we obtain
+
+$\frac{r_1}{r_2} < \frac{A_{1,1}}{A_{2,1}}$ and $\frac{r_1}{r_2} > \frac{A_{1,2}}{A_{2,2}}$
+
+Thus, we can have coexistence whenever:
+
+$\frac{A_{1,2}}{A_{2,2}} < \frac{r_1}{r_2} <\frac{A_{1,1}}{A_{2,1}}$
+
+If two species rely on very similar resources, they will compete fiercely, meaning $A_{1,1} \approx A_{1,2}$. 
+
+$\frac{A_{1,2}}{A_{2,2}} < \frac{r_1}{r_2} <\frac{A_{1,1}}{A_{2,1}}$
+
+For simplicity, set $A_{1,1} = A_{2,2} = 1$, and symmetric competition, $A_{1,2} = A_{2,1} = \alpha$. Then
+
+$\alpha < \frac{r_1}{r_2} <\frac{1}{\alpha}$
+
+For $\alpha = 0.1$, we can choose $r_1$ and $r_2$ quite freely
+
+$0.1 < \frac{r_1}{r_2} < 10$
+
+$0.1 r_2 < r_1 <  10 r_2$
+
+...for $\alpha = 0.5$, we are much more constrained...
+
+$0.5 r_2 < r_1 <  2 r_2$
+
+...and for $\alpha = 0.9$, we need to "fine tune"...
+
+$0.9 r_2 < r_1 <  1.1111 r_2$
+
+
+Two complete competitors (i.e., using the exact same resources) cannot coexist: even the slightest advantage would lead to exclusion.
+
+Important cases: invasive species
+
+**The invasive fire ant (*Solenopsis invicta*), for example, has had a devastating effect on the arthropod biota that it encounters. In a detailed study in Texas, it was found that this fire ant reduced native ant diversity by 70% and the total number of native ant individuals by 90%, apparently by competitive exclusion. [...] superior competition for food resources has resulted in the replacement of the native gecko, *Lepidodactylus lugubris*, by the invading *Hemidactylus frenatus*, throughout the Pacific. A higher resource-use efficiency of the available food resources has been implicated in the competitive superiority of the introduced snail *Batillaria attramentaria* over the native mud snail *Cerithidea californica* in the salt marshes and mud flats of northern California** (Mooney & Cleland, PNAS 2001)
+
+## Intra- vs Inter-specific competition
+
+$\frac{A_{1,2}}{A_{2,2}} < \frac{r_1}{r_2} <\frac{A_{1,1}}{A_{2,1}}$
+
+This implies
+
+$\frac{A_{1,2}}{A_{2,2}} < \frac{A_{1,1}}{A_{2,1}}$
+
+...meaning...
+
+$A_{1,2}A_{1,2} < A_{1,1} A_{2,2}$
+
+For stable coexistence, the intra-specific effects should be stronger than inter-specific ones.
+
+## More than two competitors
+
+Unfortunately, the simple condition that "intra-specific competition must exceed inter-specific competition for coexistence" does not hold for more than two competitors!
+
+For more than two species, we can have more interesting dynamics...
+
+## 3 Competitors: Limit cycles
+
+\includegraphics[width = 0.9\textwidth]{./images/limitcycle_3.jpg}
+
+## 4 Competitors: Chaos
+
+\includegraphics[width = 0.9\textwidth]{./images/chaos_4.jpg}
+
+## Competition wrapup
+
+- Competition is fundamental for both ecology and evolution
+
+- The same model examined here is at the basis of population genetics (can a mutant spread and "invade" the wildtype?)
+
+- For two competitors, the analysis is simple and unequivocal: if two species are competing strongly, one will take over
+
+- Competitive exclusion has been documented following the introduction of invasive species
+
+- For more than two competitors, the picture is much more complex
+
+## Cooperation
+
+- Cooperation within cells --- is origin of eukaryotic organelles endosymbiotic?
+
+- Cooperation between cells --- multicellularity
+
+- Cooperation between individuals --- group hunting and defense
+
+- Cooperation between species --- mutualism, symbiosis
+
+## Cooperation in a selfish world $\Pi$
+
+Traditionally, cooperation has been seen as problematic for evolution: 
+
+*"As Darwin appreciated, cooperative behavior--actions adapted to assist others that involve costs to the fitness of participants--poses a fundamental problem to the traditional theory of natural selection, which rests on the assumption that individuals compete to survive and breed"* (Clutton-Brock, 2009)
+
+*Natural selection cannot possibly produce any modification in a species exclusively for the good of another species; though throughout nature one species incessantly takes advantage of, and profits by the structures of others. [...] If it could be proved that any part of the structure of any one species had been formed for the exclusive good of another species, it would annihilate my theory, for such could not have been produced through natural selection* (Darwin, On the origin of species, 1859)
+
+## Prisoner's dilemma
+$\,$ |  C   | D
+--: | :----: | :----:
+C  | R    | S
+D  | T    | P
+
+- Two strategies: **C**ooperate, **D**efect
+- If Player 1 (rows) plays **C** and Player 2 (cols) plays **C**, Player 1 receives **R** (reward)
+- If Player 1 plays **C** and Player 2 plays **D**, Player 1 receives **S** (sucker)
+- If Player 1 plays **D** and Player 2 plays **C**, Player 1 receives **T** (temptation)
+- If Player 1 plays **D** and Player 2 plays **D**, Player 1 receives **P** (punishment)
+
+$T > R > P > S$ $\;\;\;\;$ $2 R > T + S$
+
+## A simple case
+$\,$ |  C   | D
+--: | :----: | :----:
+C  | 1    | 0
+D  | 1+k  | k
+
+- **k**: cost to cooperate
+- **k < 1**
+
+## Nash equilibrium
+$\,$ |  C   | D
+--: | :----: | :----:
+C  | 1    | 0
+D  | 1+k  | k
+
+- If Pl 2 plays **C** then Pl 1 would get **1** to cooperate, and **1 + k** to defect
+- If Pl 2 plays **D** then Pl 1 would get **0** to cooperate, and **k** to defect
+- It is always logical to defect! 
+- If Pl 2 is also rational, both will defect --- but then they would both receive lower payoffs than if they had cooperated!
+
+## Nash Equilibrium
+
+*"Nash equilibrium is an action profile with the property that no single player can obtain a higher payoff by deviating unilaterally from this profile."* (Int. Encyclopedia of social Sciences)
+
+Proposed by John Nash as part of his PhD thesis in 1950 (led to Nobel Memorial Prize in Economic Sciences in 1994).
+
+$\,$ |  C   | D
+--: | :----: | :----:
+C  | 1    | 0
+D  | 1+k  | k
+
+
+## Iterated Prisoner's Dilemma (IPD)
+
+- What if the game is played multiple times?
+- The mathematics becomes more complex
+- Many possible strategies!
+- There isn't a "best" strategy: whether a strategy is advantageous or not depends on which other strategies are around (frequency dependence)
+
+## Axelrod's tournament (1980)
+
+Robert Axelrod, a political scientist at U Michigan, invited famed game theorists to participate in a tournament of IPD.
+
+- Each strategy consisted of a computer program.
+- Each strategy played 200 turns of IPD against other strategies in a round-robin tournament, as well as against themselves.
+- Repeated 5 times to remove random fluctuations.
+- 14 strategies submitted, to which Axelrod added a RND strategy.
+
+## Some strategies
+- **ALLC** Always cooperate
+- **ALLD** Always defect
+- **RND** Cooperate with probability 50%
+
+## Winning strategy: Tit For Tat (TFT)
+
+- The winner was one of the simplest strategies, consisting of only two rules:
+ 
+1. Start by playing **C**
+2. Play whatever the opponent played last time
+
+The strategy was submitted by Anatol Rapoport, a Canadian mathematical psychologist formerly at UofC.
+
+## TFT vs ALLD
+
+-------- --------------
+ **TFT** CDDDDDDDDDDDDDDDD
+**ALLD** DDDDDDDDDDDDDDDDD
+-------- --------------
+
+
+## TFT vs ALLC
+-------- --------------
+ **TFT** CCCCCCCCCCCCCCCCCC
+**ALLC** CCCCCCCCCCCCCCCCCC
+-------- --------------
+
+## Axelrod's second tournament
+- The following year, the tournament was repeated: 62 entries.
+- The winner was again TFT! (Even though everybody knew the results of the first tournament)
+- In an influential book, Axelrod noted that good strategies possessed several traits:
+- *Be nice* (don't be the first to defect)
+- *Be provocable* (retaliate if other player does not cooperate)
+- *Don't be envious* (care about your score, not that of the opponent)
+- *Don't be clever*
+
+## Many more tournaments!
+- The tournaments are still played today.
+- Some strategies are extremely complex.
+- Many participants submit multiple strategies meant to act in concert to boost each other's performance.
+- E.g. start playing a certain sequence to see whether two programs are on the same "team"; if so, take master/slave roles.
+
+## TFT's problem: unforgiving
+The main problem of TFT is that it is unforgiving: once the opponent defects, it triggers a cascade of retaliations. 
+
+This is problematic when communication is not perfect (either you play **D** by mistake, or a **C** is mistaken for a **D**). For example, two TFT playing in a noisy environment:
+
+-------- --------------
+**TFT1** CCCCCCCC**D**DDDDDDDDDDDDD
+**TFT2** CCCCCCCCCDDDDDDDDDDDDD
+-------- --------------
+## Generous TFT (GTFT)
+Generous Tit For Tat tries to escape this cascade of retaliation by being "forgiving": it will try restoring cooperation by playing **C** with a certain probability. 
+
+- Start with **C**.
+- If the opponent plays **C**, respond with **C**.
+- If the opponent plays **D**, respond with **C** with probability 1-k; otherwise play **D**.
+- The probability depends on the cost of cooperating.
+
+## Other simple strategies
+**WSLS** (Win Stay, Lose Shift)
+
+- Start by cooperating.
+- If the previous move was successful, keep playing it; otherwise, switch to the opposite move.
+
+**GRIM** (Grim Trigger)
+
+- Start by cooperating.
+- If in the previous move both player played **C**, cooperate; otherwise defect.
+
+## Classification of strategies
+- Deterministic vs Stochastic: does the strategy involve randomness?
+- Reactive vs Non-Reactive: does it react to previous moves?
+- Memory 0, Memory 1/2, Memory 1: the strategy uses no information on the previous move (Memory 0); information on the previous move of the opponent (Memory 1/2); information on the previous move of both player (Memory 1).
+
+Examples:
+
+- **RND** (Stochastic, Non-Reactive, Memory 0)
+
+- **TFT** (Deterministic, Reactive, Memory 1/2)
+
+- **GTFT** (Stochastic, Reactive, Memory 1/2)
+
+- **GRIM** (Deterministic, Reactive, Memory 1)
+
+## Supergames
+
+- For the IPD, it is important that the players do not know how many tournaments will be played.
+- Otherwise, it is convenient to defect at the last round, but then both player will defect at the last round, making it convenient to defect at the penultimate round, and so on.
+- One mathematically convenient approximation is that in which infinitely many rounds are played---early moves do not matter.
+- The task of modeling infinite games (supergames) is easier if each player has a small probability of getting confused, playing the "unintended" move.
+
+## Supergames: math $\Pi$
+
+Vector $\mathbf{p}$ encodes the probability of playing $C$ given the previous move of both players.
+
+$\mathbf{p} = \left\{ p_{CC}, p_{CD}, p_{DC}, p_{DD} \right\}$
+
+e.g.:
+
+- RND $\mathbf{p} = \left\{0.5,0.5,0.5,0.5\right\}$
+
+- ALLD $\mathbf{p} = \left\{0,0,0,0\right\}$
+
+- ALLC $\mathbf{p} = \left\{1,1,1,1\right\}$
+
+## Supergames: math
+
+- TFT $\mathbf{p} = \left\{1,0,1,0\right\}$
+
+- GTFT $\mathbf{p} = \left\{1,1-k,1,1-k\right\}$
+
+- GRIM $\mathbf{p} = \left\{1,0,0,0\right\}$
+
+- WSLS $\mathbf{p} = \left\{1,0,0,1\right\}$
+
+## Supergames: math
+Probability of making mistakes: $\epsilon$
+
+$\mathbf{p'} = (1-\epsilon) \mathbf{p} + \epsilon(\mathbf{1} - \mathbf{p})$
+
+e.g. 
+
+- TFT $\mathbf{p'} = \left\{1 - \epsilon, \epsilon, 1 - \epsilon, \epsilon\right\}$
+- GRIM $\mathbf{p'} = \left\{1 - \epsilon, \epsilon, \epsilon, \epsilon\right\}$
+
+## Supergames: math
+- We can model the evolution of the game as a Markov Chain with four states, denoting the moves played by the two players at time $t$: CC, CD, DC, DD.
+- Player 1 plays $\mathbf{p'}$; Player 2 plays $\mathbf{q'}$
+
+$M = \left(\begin{array}[cccc]
+{p'}_{1} {q'}_{1} & {p'}_{1} (1- {q'}_{1}) & (1- {p'}_{1}) {q'}_{1} & (1 - {p'}_{1}) (1- {q'}_{1})\\
+{p'}_{2} {q'}_{3} & {p'}_{2} (1- {q'}_{3}) & (1- {p'}_{2}) {q'}_{3} & (1 - {p'}_{2}) (1- {q'}_{3})\\
+{p'}_{3} {q'}_{2} & {p'}_{3} (1- {q'}_{2}) & (1- {p'}_{3}) {q'}_{2} & (1 - {p'}_{3}) (1- {q'}_{2})\\
+{p'}_{4} {q'}_{4} & {p'}_{4} (1- {q'}_{4}) & (1- {p'}_{4}) {q'}_{4} & (1 - {p'}_{4}) (1- {q'}_{4})
+\end{array}
+\right)$
+
+- Note that row sum is 1 for all rows
+
+## Stationary distribution
+
+- Because this is a Markov Chain, and because we have the small $\epsilon$ guaranteeing that all coefficients are nonzero, the game will eventually converge to a stationary distribution.
+
+- We can project the game forward, modeling $S_t$, the probability of being in each state at time $t$.
+
+- $S_{t + 1} = S_t M$
+
+- We rapidly approach a distribution of probabilities that does not change through time:
+
+- $v M = v$
+
+## Stationary distribution
+```{r, echo=FALSE,message=FALSE,warning=FALSE}
+input <- list(pl1 = "WSLS", pl2 = "TFT", ep = 0.01, k = 0.5)
+library(ggplot2)
+source("code/ShowMC.R")
+show(ShowSimulation(input$pl1, input$pl2, input$ep, input$k))
+```
+
+## Evolutionary game theory
+- We have a population of individuals.
+- Each individual has genes encoding a strategy.
+- Mutations lead to individuals with different strategies.
+- Mutations are rare: in this limit we will have at most two strategies at any time.
+- Can mutations spread in the population?
+- Only if "mutant" can invade "wildtype".
+- We need to consider the average payoff (fitness) of the mutant against wildtype, mutant against mutant, wildtype against wildtype.
+
+## Calculating average payoff (fitness)
+
+- Matrix $M$
+- Stationary distribution $\mathbf{v}$
+- Player 1 plays $\mathbf{p'}$, Player 2 plays $\mathbf{q'}$
+- Average payoff of Player 1: $\pi (\mathbf{p'}, \mathbf{q'}) = \mathbf{v} \mathbf{h_1}$, where $\mathbf{h_1} = \left\{ 1, 0, 1 + k, k\right\}$
+- Average payoff of Player 2: $\pi (\mathbf{q'}, \mathbf{p'}) = \mathbf{v} \mathbf{h_2}$, where $\mathbf{h_2} = \left\{ 1, 1 + k, 0, k\right\}$
+
+## Average Fitness
+```{r, echo=FALSE,message=FALSE,warning=FALSE}
+input <- list(pl1_2 = "WSLS", pl2_2 = "TFT", ep = 0.01, k_2 = 0.5)
+library(ggplot2)
+source("code/MCIPD.R")
+show(PlotPayOffs(input$pl1_2, input$pl2_2, input$ep, input$k_2))
+```
+
+## War and Peace: ALLC vs ALLD
+
+Start with a population composed of cooperators: can **ALLD** invade?
+
+## ALLD can invade ALLC
+
+\includegraphics[width = 0.9\textwidth]{./images/step1.png}
+
+Can **ALLD** be invaded by **TFT**?
+
+## TFT can invade ALLD
+
+\includegraphics[width = 0.9\textwidth]{./images/step2.png}
+
+Can **TFT** be invaded by **GTFT**?
+
+## GTFT can invade TFT
+
+\includegraphics[width = 0.9\textwidth]{./images/step3.png}
+
+Can **GTFT** be invaded by **ALLC**, closing the cycle?
+
+## The cycle: War and Peace
+
+\includegraphics[width = 0.9\textwidth]{./images/step4.png}
+
+What about **WSLS**?
+
+\includegraphics[width = 0.9\textwidth]{./images/step5.png}
+
+Is **WSLS** invasible?
+
+\includegraphics[width = 0.9\textwidth]{./images/step6.png}
+
+## The cycle: War and Peace
+
+*There is one thing that I have learned in my studies of cooperation over the last 20 years: there is no equilibrium. There is never a stable equilibrium. Cooperation is always being destroyed and has to be rebuilt.* (Martin Nowak)
+
+## Other mechanisms for cooperation
+
+- We have played with **direct reciprocity** (I scratch your back, you scratch my back)
+- Another key mechanism is **indirect reciprocity** (golden rule --- I scratch your back, somebody will scratch mine)
+- Indirect reciprocity can lead to emergence of cooperation when **reputation** is at stake
+- *"For direct reciprocity you need a face; for indirect reciprocity you need a name."* (David Haig)
+
+## Spatial cooperation $\Pi$
+
+- Cooperation can also emerge in a spatial context -- **ALLD** cannot wipe out **ALLC** in a spatial game
+
+\includegraphics[width = 0.9\textwidth]{./images/spatial1.jpg}
+
+Nowak and May, 1992
+
+## Spatial cooperation $\Pi$
+
+\includegraphics[width = 0.9\textwidth]{./images/spatial2.jpg}
+
+Nowak and May, 1992
+
+## Multilevel selection
+
+- Evolutionary game theory has been applied to multilevel selection
+- Group selection
+- Kin selection
+
+## Cooperation wrapup
+
+- Cooperation can emerge through mutations in an otherwise non-cooperative population.
+- This means that cooperative strategies could be selected by evolution.
+- However, a cycle ensues in which cooperative strategies raise and fall.
+- Many mechanisms can give rise to cooperative behavior, including direct reciprocity, indirect reciprocity, spatial patterns, and group/kin selection.
+
+## Interactions matter
+
+In all these examples, we've seen that interactions between individuals or populations can change dramatically the behavior of biological systems.
+
+Much of modern biology is centered around the role of interactions, be it between genes (epistasis, gene-regulation), individuals (sociobiology, behavior), populations (microbiomes, community ecology) or even ecosystems (landscape ecology).
+
+From a theoretical standpoint, we're very constrained: a number of models have been successful at explaining relations between a handful of agents, but rarely we've been able to say something significant for large assemblages and networks of interacting agents.
+
+## Interactions matter
+
+Despite these limitations, there is a mounting interest in taking a more holistic approach, and consider how networks of interacting agents could be key for our understanding of health (can your microbiome make you resistant to infections?), fisheries (how much can we fish? It depends on other species!), conservation biology (will this invader establish?), and even finance (network of lending between banks) and society (migrations, mobility).
+
+
+## Thinking like an ecologist
+
+Biological systems:
+
+- Are **large**
+
+- Are **dynamic**
+
+- Contain **feedback loops**
+
+- Are **nonlinear**
+
+- Possess **network structure**
+
+- Are **adaptive**
+
+- Can have **multiple attractors**
+
+
+## I want to learn more ecology
+
+- **BIOS 13107. ENVIRONMENTAL ECOLOGY** (Undergraduate, Trevor Price, WI)
+
+- **BIOS 13126. TROPICAL ECOLOGY** (Undergraduate, Eric Larsen, WI)
+
+- **BIOS 13128. PLANT-ANIMAL INTERACTIONS** (Undergraduate, Alison Hunter, WI)
+
+- **BIOS 20196. ECOLOGY AND CONSERVATION** (Undergraduate, Cathy Pfister & Eric Larsen, AU)
+
+- **BIOS 23289. MARINE ECOLOGY** (Undergraduate, Tim Wootton, WI)
+
+- **BIOS 23232/33. ECOLOGY AND EVOLUTION IN THE SOUTHWEST** (Undegraduate, Eric Larsen, SP)
+
+## I want to learn more ecology
+
+- **BIOS 23254. MAMMALIAN ECOLOGY** (Undegraduate, Eric Larsen, SP)
+
+- **BIOS 23409. THE ECOLOGY AND EVOLUTION OF INFECTIOUS DISEASES** (Undergraduate, Greg Dwyer, SP)
+
+- **BIOS 23410. COMPLEX INTERACTIONS** (Undergraduate, Thorsten Lumbsch, SP)
+
+- **ECEV 42600. COMMUNITY ECOLOGY** (Graduate, Tim Wootton, AU)
+
+- **ECEV 42800. POPULATION ECOLOGY** (Graduate, Cathy Pfister, WI)
+
+- **ECEV 42900. THEORETICAL ECOLOGY** (Graduate, Greg Dwyer & Sarah Cobey, WI)
+
+## I want to do research in ecology
+
+- **Allesina Lab** (allesinalab.uchicago.edu): theoretical ecology, networks, mathematical biology
+
+- **Cobey Lab** (cobeylab.uchicago.edu): theory of host-pathogen systems, pathogen evolution, influenza
+
+- **Dwyer Lab** (dwyerlab.uchicago.edu): ecology and evolution of infectious diseases. Theory + field work!
+
+- **Pascual Lab** Infectious diseases and climate. Malaria, cholera, influenza. Mathematical and statistical modeling.
+
+- **Pfister/Wootton Lab** (pfisterlab.uchicago.edu woottonlab.uchicago.edu) Community ecology of intertidal systems. 20+ years studying ecology at Tatoosh Island.
+
+## Thank You!
+
+For any question/comment/feedback/... on the material, write me at:
+
+sallesina@uchicago.edu
+
+or stop by Zoology 403A, and I'll buy you an espresso!
+
