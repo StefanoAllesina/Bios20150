@@ -2,7 +2,11 @@
 title: "Interactions"
 author: "Stefano Allesina"
 date: ""
-
+header-includes: 
+  - \usepackage{array}
+  - \usepackage{amsmath}
+  - \usepackage{amssymb}
+  
 output:
   pdf_document: default
 html_document: default
@@ -497,7 +501,7 @@ Generous Tit For Tat tries to escape this cascade of retaliation by being "forgi
 **GRIM** (Grim Trigger)
 
 - Start by cooperating.
-- If in the previous move both player played **C**, cooperate; otherwise defect.
+- If in the previous move both players played **C**, cooperate; otherwise defect.
 
 ## Classification of strategies
 - Deterministic vs Stochastic: does the strategy involve randomness?
@@ -555,17 +559,15 @@ e.g.
 - TFT $\mathbf{p'} = \left\{1 - \epsilon, \epsilon, 1 - \epsilon, \epsilon\right\}$
 - GRIM $\mathbf{p'} = \left\{1 - \epsilon, \epsilon, \epsilon, \epsilon\right\}$
 
-## Supergames: math
 - We can model the evolution of the game as a Markov Chain with four states, denoting the moves played by the two players at time $t$: CC, CD, DC, DD.
 - Player 1 plays $\mathbf{p'}$; Player 2 plays $\mathbf{q'}$
 
-$M = \left(\begin{array}[cccc]
-{p'}_{1} {q'}_{1} & {p'}_{1} (1- {q'}_{1}) & (1- {p'}_{1}) {q'}_{1} & (1 - {p'}_{1}) (1- {q'}_{1})\\
-{p'}_{2} {q'}_{3} & {p'}_{2} (1- {q'}_{3}) & (1- {p'}_{2}) {q'}_{3} & (1 - {p'}_{2}) (1- {q'}_{3})\\
-{p'}_{3} {q'}_{2} & {p'}_{3} (1- {q'}_{2}) & (1- {p'}_{3}) {q'}_{2} & (1 - {p'}_{3}) (1- {q'}_{2})\\
-{p'}_{4} {q'}_{4} & {p'}_{4} (1- {q'}_{4}) & (1- {p'}_{4}) {q'}_{4} & (1 - {p'}_{4}) (1- {q'}_{4})
+$$\mathbf{M} = \left(\begin{array}{cccc} \mathbf{p'}_{1} \mathbf{q'}_{1} & \mathbf{p'}_{1} (1- \mathbf{q'}_{1}) & (1- \mathbf{p'}_{1}) \mathbf{q'}_{1} & (1 - \mathbf{p'}_{1}) (1- \mathbf{q'}_{1})\\
+\mathbf{p'}_{2} \mathbf{q'}_{3} & \mathbf{p'}_{2} (1- \mathbf{q'}_{3}) & (1- \mathbf{p'}_{2}) \mathbf{q'}_{3} & (1 - \mathbf{p'}_{2}) (1- \mathbf{q'}_{3})\\
+\mathbf{p'}_{3} \mathbf{q'}_{2} & \mathbf{p'}_{3} (1- \mathbf{q'}_{2}) & (1- \mathbf{p'}_{3}) \mathbf{q'}_{2} & (1 - \mathbf{p'}_{3}) (1- \mathbf{q'}_{2})\\
+\mathbf{p'}_{4} \mathbf{q'}_{4} & \mathbf{p'}_{4} (1- \mathbf{q'}_{4}) & (1- \mathbf{p'}_{4}) \mathbf{q'}_{4} & (1 - \mathbf{p'}_{4}) (1- \mathbf{q'}_{4})
 \end{array}
-\right)$
+\right)$$
 
 - Note that row sum is 1 for all rows
 
@@ -583,7 +585,7 @@ $M = \left(\begin{array}[cccc]
 
 ## Stationary distribution
 ```{r, echo=FALSE,message=FALSE,warning=FALSE}
-input <- list(pl1 = "WSLS", pl2 = "TFT", ep = 0.01, k = 0.5)
+input <- list(pl1 = "WSLS", pl2 = "GRIM", ep = 0.02, k = 0.5)
 library(ggplot2)
 source("code/ShowMC.R")
 show(ShowSimulation(input$pl1, input$pl2, input$ep, input$k))

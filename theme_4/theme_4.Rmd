@@ -649,7 +649,7 @@ Generous Tit For Tat tries to escape this cascade of retaliation by being "forgi
 **GRIM** (Grim Trigger)
 
 - Start by cooperating.
-- If in the previous move both player played **C**, cooperate; otherwise defect.
+- If in the previous move both players played **C**, cooperate; otherwise defect.
 
 ## Classification of strategies
 - Deterministic vs Stochastic: does the strategy involve randomness?
@@ -711,8 +711,8 @@ e.g.
 - We can model the evolution of the game as a Markov Chain with four states, denoting the moves played by the two players at time $t$: CC, CD, DC, DD.
 - Player 1 plays $\mathbf{p'}$; Player 2 plays $\mathbf{q'}$
 
-$\mathbf M = \left(\begin{array}[cccc]
-{}\mathbf{p'}_{1} \mathbf{q'}_{1} & \mathbf{p'}_{1} (1- \mathbf{q'}_{1}) & (1- \mathbf{p'}_{1}) \mathbf{q'}_{1} & (1 - \mathbf{p'}_{1}) (1- \mathbf{q'}_{1})\\
+$\mathbf M = \left(\begin{array}{cccc}
+\mathbf{p'}_{1} \mathbf{q'}_{1} & \mathbf{p'}_{1} (1- \mathbf{q'}_{1}) & (1- \mathbf{p'}_{1}) \mathbf{q'}_{1} & (1 - \mathbf{p'}_{1}) (1- \mathbf{q'}_{1})\\
 \mathbf{p'}_{2} \mathbf{q'}_{3} & \mathbf{p'}_{2} (1- \mathbf{q'}_{3}) & (1- \mathbf{p'}_{2}) \mathbf{q'}_{3} & (1 - \mathbf{p'}_{2}) (1- \mathbf{q'}_{3})\\
 \mathbf{p'}_{3} \mathbf{q'}_{2} & \mathbf{p'}_{3} (1- \mathbf{q'}_{2}) & (1- \mathbf{p'}_{3}) \mathbf{q'}_{2} & (1 - \mathbf{p'}_{3}) (1- \mathbf{q'}_{2})\\
 \mathbf{p'}_{4} \mathbf{q'}_{4} & \mathbf{p'}_{4} (1- \mathbf{q'}_{4}) & (1- \mathbf{p'}_{4}) \mathbf{q'}_{4} & (1 - \mathbf{p'}_{4}) (1- \mathbf{q'}_{4})
